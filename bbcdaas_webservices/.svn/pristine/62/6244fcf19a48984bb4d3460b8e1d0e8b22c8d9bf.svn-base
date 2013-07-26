@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="base.definition" template="/layout.jsp">
+		<put-attribute name="title" value="BBC-DaaS Webservices" />
+		<put-attribute name="head" value="/jsp/head.jsp" />
+	</definition>
+	
+	<definition name="page.webservices" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/webservices.jsp" />
+	</definition>
+	
+</tiles-definitions>

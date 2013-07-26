@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="defaultTemplate" template="/template/template.jsp">
+		<put-attribute name="head" value="/template/head.jsp" />
+        <put-attribute name="header" value="/template/header.jsp" />
+        <put-attribute name="menu" value="/template/menu.jsp" />
+		<put-attribute name="main" value="/template/startpage.jsp" />
+        <put-attribute name="footer" value="/template/footer.jsp" />
+    </definition>
+
+	<definition name="startpage" extends="defaultTemplate">
+		<put-attribute name="main" value="/template/startpage.jsp" />
+	</definition>
+
+    <definition name="wikipedia" extends="defaultTemplate">
+		<put-attribute name="main" value="/views/wikipedia/wikipedia.jsp" />
+	</definition>
+
+	<definition name="categoryContext" extends="defaultTemplate">
+		<put-attribute name="main" value="/views/wikipedia/categoryContext.jsp" />
+	</definition>
+
+	<definition name="wikipediaHelp" extends="defaultTemplate">
+		<put-attribute name="main" value="/views/wikipedia/subforms/wikipediaHelp.jsp" />
+	</definition>
+
+    <definition name="wikipediaUrlSearchResult" template="/template/ajaxTemplate.jsp">
+		<put-attribute name="ajax" value="/views/wikipedia/subforms/wikipediaUrlSearchResult.jsp" />
+	</definition>
+
+	<definition name="wikipediaGetCategoryContextResult" template="/template/ajaxTemplate.jsp">
+		<put-attribute name="ajax" value="/views/wikipedia/subforms/categoryContextResult.jsp" />
+	</definition>
+
+	<definition name="wikipediaDisambiguationResult" template="/template/ajaxTemplate.jsp">
+		<put-attribute name="ajax" value="/views/wikipedia/subforms/wikipediaDisambiguationResult.jsp" />
+	</definition>
+
+    <definition name="suggestionResult" template="/template/ajaxTemplate.jsp">
+		<put-attribute name="ajax" value="/views/common/suggestionResult.jsp" />
+	</definition>
+
+	<definition name="disambiguationInputs" template="/template/ajaxTemplate.jsp">
+		<put-attribute name="ajax" value="/views/common/disambiguationInputs.jsp" />
+	</definition>
+
+</tiles-definitions>

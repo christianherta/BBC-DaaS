@@ -1,0 +1,192 @@
+#-------------------------------------------------------------------------------
+#define variable parameters for the evaluation here
+# 1. add name of the parameter to the property list 'variableParameterNames', separated by comma
+# 2. add a property with the name <nameOfTheParameter>Type, example: name = 'x', property to add: 'xType'
+# following types are currently supported:
+# '1' : int
+# '2' : float
+# '3' : enum
+# a) steps for the types '1' and '2':
+# a.1 add a property with the name <nameOfTheParameter>StartValue
+# a.2 add a property with the name <nameOfTheParameter>EndValue
+# a.3 add a property with the name <nameOfTheParameter>Step
+# a.4 add a property with the name <nameOfTheParameter>Use
+# b) steps for the type '3':
+# b.1 add a property with the name <nameOfTheParameter>Steps
+# b.2 add a property with the name <nameOfTheParameter>Use
+#-------------------------------------------------------------------------------
+# Advice: Most of the parameters belong to a disambiguation plugin (candidateFinder,
+# scorer, categorizer, scoringCombiner) and should only be used if the corresponding
+# plugin is been used to prevent executing evaluation steps with equal used
+# parameters more than once. This configuration file works in combination with the
+# current disambiguation configuration.
+# ONLY parameters supported by the evaluator implementation can be set here.
+# (@see setVarParameterIntoConfig() - Method in evaluator)
+
+# === list of all known variable parameter names: ===
+# even unused parameters can be in the list (Used == false)
+variableParameterNames = multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScore,titlePatternCandidateFinder_alternativeURIRating,titlePatternCandidateFinder__maxTermDocuments,titlePatternCandidateFinder_maxTermDocumentsPerPattern,titlePatternCandidateFinder_patternRatings_1,titlePatternCandidateFinder_patternRatings_2,titlePatternCandidateFinder_patternRatings_3,titlePatternCandidateFinder_patternRatings_4,titlePatternCandidateFinder_patternRatings_5,titlePatternCandidateFinder_patternRatings_6,titlePatternCandidateFinder_patternRatings_7,titlePatternCandidateFinder_patternRatings_8,titlePatternCandidateFinder_patternRatings_9,titlePatternCandidateFinder_patternRatings_10,linearScoringCombiner_documentScorerWeightings_1,linearScoringCombiner_documentScorerWeightings_2,linearScoringCombiner_documentScorerWeightings_3,linearScoringCombiner_documentScorerWeightings_4,linearScoringCombiner_documentScorerWeightings_5
+
+# === variable parameter definitions: ===
+
+#--------------------titlePatternCandidateFinder--------------------------------
+
+#titlePatternCandidateFinder_alternativeURIRating:
+# These is a parameter of the titlePatternCandidateFinder (needs to be used in disambiguation configuration)
+titlePatternCandidateFinder_alternativeURIRatingUse = false
+titlePatternCandidateFinder_alternativeURIRatingType = 2
+titlePatternCandidateFinder_alternativeURIRatingStartValue = 0
+titlePatternCandidateFinder_alternativeURIRatingEndValue = 0.6
+titlePatternCandidateFinder_alternativeURIRatingStep = 0.2
+
+#titlePatternCandidateFinder__maxTermDocuments: (should be a bigger value than titlePatternCandidateFinder_maxTermDocumentsPerPattern)
+# These is a parameter of the titlePatternCandidateFinder (needs to be used in disambiguation configuration)
+titlePatternCandidateFinder__maxTermDocumentsUse = false
+titlePatternCandidateFinder__maxTermDocumentsType = 1
+titlePatternCandidateFinder__maxTermDocumentsStartValue = 10
+titlePatternCandidateFinder__maxTermDocumentsEndValue = 20
+titlePatternCandidateFinder__maxTermDocumentsStep = 2
+
+#titlePatternCandidateFinder_maxTermDocumentsPerPattern:
+# These is a parameter of the titlePatternCandidateFinder (needs to be used in disambiguation configuration)
+titlePatternCandidateFinder_maxTermDocumentsPerPatternUse = false
+titlePatternCandidateFinder_maxTermDocumentsPerPatternType = 1
+titlePatternCandidateFinder_maxTermDocumentsPerPatternStartValue = 10
+titlePatternCandidateFinder_maxTermDocumentsPerPatternEndValue = 15
+titlePatternCandidateFinder_maxTermDocumentsPerPatternStep = 1
+
+#------------- scorer weightings ------------------
+# important: for each scorer index used here a scorer must be configured in the
+# disambiguation properties. The index starts with 1.
+# This is a parameter of the linear scoring combiner (needs to be used in disambiguation config)
+
+linearScoringCombiner_documentScorerWeightings_1Use = false
+linearScoringCombiner_documentScorerWeightings_1Type = 2
+linearScoringCombiner_documentScorerWeightings_1StartValue = 0.5
+linearScoringCombiner_documentScorerWeightings_1EndValue = 0.8
+linearScoringCombiner_documentScorerWeightings_1Step = 0.1
+
+linearScoringCombiner_documentScorerWeightings_2Use = false
+linearScoringCombiner_documentScorerWeightings_2Type = 2
+linearScoringCombiner_documentScorerWeightings_2StartValue = 0.5
+linearScoringCombiner_documentScorerWeightings_2EndValue = 0.8
+linearScoringCombiner_documentScorerWeightings_2Step = 0.1
+
+linearScoringCombiner_documentScorerWeightings_3Use = false
+linearScoringCombiner_documentScorerWeightings_3Type = 2
+linearScoringCombiner_documentScorerWeightings_3StartValue = 0.5
+linearScoringCombiner_documentScorerWeightings_3EndValue = 0.8
+linearScoringCombiner_documentScorerWeightings_3Step = 0.1
+
+linearScoringCombiner_documentScorerWeightings_4Use = false
+linearScoringCombiner_documentScorerWeightings_4Type = 2
+linearScoringCombiner_documentScorerWeightings_4StartValue = 0.5
+linearScoringCombiner_documentScorerWeightings_4EndValue = 0.8
+linearScoringCombiner_documentScorerWeightings_4Step = 0.1
+
+linearScoringCombiner_documentScorerWeightings_5Use = false
+linearScoringCombiner_documentScorerWeightings_5Type = 2
+linearScoringCombiner_documentScorerWeightings_5StartValue = 0.5
+linearScoringCombiner_documentScorerWeightings_5EndValue = 0.8
+linearScoringCombiner_documentScorerWeightings_5Step = 0.1
+#------------- /scorer weightings -----------------
+
+#------------ pattern ratings ---------------------
+# These is a parameter of the titlePatternCandidateFinder (needs to be used in disambiguation configuration)
+# possible pattern:
+#  1: <_><termValue><_>
+#  2: <_><TermValue> (*)
+#  3: <_><termValue> *
+#  4: <_><termValue>-*
+#  5: * <termValue><_>
+#  6: *-<termValue><_>
+#  7: *<termValue><_>
+#  8: * <termValue> *
+#  9: *-<TermValue>-*
+# 10: *<termValue>*
+
+# pattern rating 1
+titlePatternCandidateFinder_patternRatings_1Use = true
+titlePatternCandidateFinder_patternRatings_1Type = 2
+titlePatternCandidateFinder_patternRatings_1StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_1EndValue = 1
+titlePatternCandidateFinder_patternRatings_1Step = 0.5
+
+# pattern rating 2
+titlePatternCandidateFinder_patternRatings_2Use = true
+titlePatternCandidateFinder_patternRatings_2Type = 2
+titlePatternCandidateFinder_patternRatings_2StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_2EndValue = 1
+titlePatternCandidateFinder_patternRatings_2Step = 0.5
+
+# pattern rating 3
+titlePatternCandidateFinder_patternRatings_3Use = true
+titlePatternCandidateFinder_patternRatings_3Type = 2
+titlePatternCandidateFinder_patternRatings_3StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_3EndValue = 1
+titlePatternCandidateFinder_patternRatings_3Step = 0.5
+
+# pattern rating 4
+titlePatternCandidateFinder_patternRatings_4Use = true
+titlePatternCandidateFinder_patternRatings_4Type = 2
+titlePatternCandidateFinder_patternRatings_4StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_4EndValue = 1
+titlePatternCandidateFinder_patternRatings_4Step = 0.5
+
+# pattern rating 5
+titlePatternCandidateFinder_patternRatings_5Use = true
+titlePatternCandidateFinder_patternRatings_5Type = 2
+titlePatternCandidateFinder_patternRatings_5StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_5EndValue = 1
+titlePatternCandidateFinder_patternRatings_5Step = 0.5
+
+# pattern rating 6
+titlePatternCandidateFinder_patternRatings_6Use = true
+titlePatternCandidateFinder_patternRatings_6Type = 2
+titlePatternCandidateFinder_patternRatings_6StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_6EndValue = 1
+titlePatternCandidateFinder_patternRatings_6Step = 0.5
+
+# pattern rating 7
+titlePatternCandidateFinder_patternRatings_7Use = true
+titlePatternCandidateFinder_patternRatings_7Type = 2
+titlePatternCandidateFinder_patternRatings_7StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_7EndValue = 1
+titlePatternCandidateFinder_patternRatings_7Step = 0.5
+
+# pattern rating 8
+titlePatternCandidateFinder_patternRatings_8Use = true
+titlePatternCandidateFinder_patternRatings_8Type = 2
+titlePatternCandidateFinder_patternRatings_8StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_8EndValue = 1
+titlePatternCandidateFinder_patternRatings_8Step = 0.5
+
+# pattern rating 9
+titlePatternCandidateFinder_patternRatings_9Use = true
+titlePatternCandidateFinder_patternRatings_9Type = 2
+titlePatternCandidateFinder_patternRatings_9StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_9EndValue = 1
+titlePatternCandidateFinder_patternRatings_9Step = 0.5
+
+# pattern rating 10
+titlePatternCandidateFinder_patternRatings_10Use = true
+titlePatternCandidateFinder_patternRatings_10Type = 2
+titlePatternCandidateFinder_patternRatings_10StartValue = 0.5
+titlePatternCandidateFinder_patternRatings_10EndValue = 1
+titlePatternCandidateFinder_patternRatings_10Step = 0.5
+
+#------------ /pattern ratings ---------------------
+
+#--------------------/titlePatternCandidateFinder-------------------------------
+
+#----------------multimatchingSurfaceFormDocumentScorer-------------------------
+
+#multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScore:
+# These is a parameter of the multimatchingSurfaceFormDocumentScorer (needs to be used in disambiguation configuration)
+multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScoreUse = false
+multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScoreType = 2
+multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScoreStartValue = 0
+multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScoreEndValue = 0.1
+multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScoreStep = 0.1
+
+#----------------/multimatchingSurfaceFormDocumentScorer------------------------

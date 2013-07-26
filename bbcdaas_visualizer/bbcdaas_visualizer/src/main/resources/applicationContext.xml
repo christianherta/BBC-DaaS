@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/jdbc
+           http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		   http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+		   http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+
+	<bean id="propertyPlaceholderConfigurer"
+		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/project.properties</value>
+				<value>classpath:properties/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+<!--********************* data source definitions ************************-->
+
+	<bean id="dataSource_visualizer" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.visualizer.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.visualizer.mySQL.url}"/>
+		<property name="username" value="${jdbc.visualizer.mySQL.username}"/>
+		<property name="password" value="${jdbc.visualizer.mySQL.password}"/>
+		<property name="initialSize" value="${jdbc.visualizer.mySQL.initialSize}" />
+		<property name="maxActive" value="${jdbc.visualizer.mySQL.maxActive}" />
+	</bean>
+
+	<bean id="dataSource_taghandler" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.taghandlerDB.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.taghandlerDB.mySQL.url}"/>
+		<property name="username" value="${jdbc.taghandlerDB.mySQL.username}"/>
+		<property name="password" value="${jdbc.taghandlerDB.mySQL.password}"/>
+		<property name="initialSize" value="${jdbc.taghandlerDB.mySQL.initialSize}" />
+		<property name="maxActive" value="${jdbc.taghandlerDB.mySQL.maxActive}" />
+	</bean>
+	
+	<bean id="dataSource_themehandler" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.themeHandler.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.themeHandler.mySQL.url}"/>
+		<property name="username" value="${jdbc.themeHandler.mySQL.username}"/>
+		<property name="password" value="${jdbc.themeHandler.mySQL.password}"/>
+		<property name="initialSize" value="${jdbc.themeHandler.mySQL.initialSize}" />
+		<property name="maxActive" value="${jdbc.themeHandler.mySQL.maxActive}" />
+	</bean>
+	
+	<bean id="dataSource_taghandler_termLexicon" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.taghandler_termLexicon.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.taghandler_termLexicon.mySQL.url}"/>
+		<property name="username" value="${jdbc.taghandler_termLexicon.mySQL.username}"/>
+		<property name="password" value="${jdbc.taghandler_termLexicon.mySQL.password}"/>
+		<property name="initialSize" value="${jdbc.taghandler_termLexicon.mySQL.initialSize}" />
+		<property name="maxActive" value="${jdbc.taghandler_termLexicon.mySQL.maxActive}" />
+	</bean>
+	
+	<bean id="dataSource_evaluation" 
+		  class="org.apache.commons.dbcp.BasicDataSource" 
+		  destroy-method="close">
+		<property name="driverClassName" value="${jdbc.evaluation.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.evaluation.mySQL.url}"/>
+		<property name="username" value="${jdbc.evaluation.mySQL.username}"/>
+		<property name="password" value="${jdbc.evaluation.mySQL.password}"/>
+		<property name="initialSize" value="${jdbc.evaluation.mySQL.initialSize}" />
+		<property name="maxActive" value="${jdbc.evaluation.mySQL.maxActive}" />
+	</bean>
+
+<!--******************** /data source definitions ***********************-->
+
+<!--****************************** dao **********************************-->
+    
+	<bean id="jdbcAPI_visualizer"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_visualizer"/>
+		  <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+		  <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+		  <property name="singleConnection" value="${jdbc.singleConnection}"/>
+	</bean>
+	
+	<bean id="jdbcAPI_taghandler"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_taghandler"/>
+		  <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+		  <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+		  <property name="singleConnection" value="${jdbc.singleConnection}"/>
+	</bean>
+	
+	<bean id="jdbcAPI_themehandler"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_themehandler"/>
+		  <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+		  <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+		  <property name="singleConnection" value="${jdbc.singleConnection}"/>
+	</bean>
+	
+	<bean id="jdbcAPI_taghandler_termLexicon"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_taghandler_termLexicon"/>
+		  <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+		  <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+		  <property name="singleConnection" value="${jdbc.singleConnection}"/>
+	</bean>
+	
+	<bean id="jdbcAPI_evaluation"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_evaluation"/>
+		  <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+		  <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+		  <property name="singleConnection" value="${jdbc.singleConnection}"/>
+	</bean>
+	
+	<bean id="visualizerDao"
+		  class="de.bbcdaas.visualizer.dao.impl.sql.VisualizerDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_visualizer"/>
+	</bean>
+	
+	<bean id="taghandlerDao"
+		  class="de.bbcdaas.taghandler.dao.impl.sql.TagHandlerDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_taghandler"/>
+	</bean>
+	
+	<bean id="themehandlerDao"
+		  class="de.bbcdaas.visualizer.dao.impl.sql.ThemeHandlerDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_themehandler"/>
+	</bean>
+	
+	<bean id="taghandler_termlexiconDao"
+		  class="de.bbcdaas.taghandler.dao.impl.sql.TermLexiconDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_taghandler_termLexicon"/>
+	</bean>
+	
+	<bean id="evaluationDao"
+		  class="de.bbcdaas.visualizer.dao.impl.sql.EvaluationDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_evaluation"/>
+	</bean>
+    
+	<!--****************************** /dao *********************************-->
+
+	<!--************************** statistics *******************************-->
+
+	<bean id="statisticWriter"
+		  class="de.bbcdaas.taghandler.writer.statistics.SimpleStatisticWriter">
+		<property name="taghandlerDao" ref="taghandlerDao" />
+		<property name="statisticOutputDirectory" value="${statisticWriter.statisticOutputDirectory}" /> 
+		<property name="writeEntityOutput" value="${statisticWriter.writeEntityOutput}" /> 
+		<property name="entityOutputFileName" value="${statisticWriter.entityOutputFileName}" />
+		<property name="writeTermLexiconOutput" value="${statisticWriter.writeTermLexiconOutput}" />
+		<property name="termLexiconOutputFileName" value="${statisticWriter.termLexiconOutputFileName}" />
+		<property name="writeCooccurrenceOutput" value="${statisticWriter.writeCooccurrenceOutput}" />
+		<property name="cooccurrenceOutputFileName" value="${statisticWriter.cooccurrenceOutputFileName}" />
+		<property name="writeTopRelatedTermsOutput" value="${statisticWriter.writeTopRelatedTermsOutput}" />
+		<property name="topRelatedTermsOutputFileName" value="${statisticWriter.topRelatedTermsOutputFileName}" />
+	</bean>
+	
+	<!--************************* /statistics *******************************-->
+
+	<bean id="trainingDataWriter"
+		  class="de.bbcdaas.taghandler.writer.mahout.TrainingDataWriterImpl">
+		<property name="taghandlerDao" ref="taghandlerDao" />
+		<property name="dictionaryOutputFileName" value="${trainingDataWriter.dictionaryOutputFileName}" />
+		<property name="trainingDataOutputFileName" value="${trainingDataWriter.trainingDataOutputFileName}" />
+	</bean>
+	
+	<!--********************* relation computing ****************************-->
+    
+	<bean id="syntagmaticRelationCompute" 
+		  class="de.bbcdaas.taghandler.compute.relation.syntagmatic.SimpleSyntagmaticRelationCompute">
+		<property name="taghandlerDao" ref="taghandlerDao" />
+		<property name="termLexiconDao" ref="taghandler_termlexiconDao" />
+        <property name="rankListEntryScorer" ref="rankListEntryScorer" />
+		<property name="maxTopRelatedTerms" value="${syntagmaticComputation.maxTopRelatedTerms}" />
+		<property name="syntagmaticEntityTermFactor" value="${syntagmaticComputation.syntagmaticEntityTermFactor}" />
+	</bean> 
+    
+    <!--******************** /relation computing ****************************-->
+
+    <!--******************** rank list entry scorer *************************-->
+
+	<bean id="rankListEntryScorer"
+		  class="de.bbcdaas.taghandler.compute.score.SimpleRankListEntryScorer">
+	</bean> 
+	
+    <!--******************* /rank list entry scorer *************************-->
+	
+</beans>

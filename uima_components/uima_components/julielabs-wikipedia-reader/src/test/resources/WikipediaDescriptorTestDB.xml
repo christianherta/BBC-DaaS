@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>de.julielab.jules.reader.WikipediaReader</implementationName>
+  <processingResourceMetaData>
+    <name>WikipediaReader</name>
+    <description/>
+    <version>0.1</version>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>DataBaseServerURL</name>
+        <description>the URL of the database</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DataBase</name>
+        <description>The name of the Database on the Database server</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DataBaseUser</name>
+        <description>Username to access the database</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DataBasePassword</name>
+        <description>the password to the database</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>DataBaseDriver</name>
+        <description>database driver to be used</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>Language</name>
+        <description>Language of the Wikipedia used. If the parameter is empty, 'en' is taken as default value.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>AddMetaData</name>
+        <description>If true, an article descriptor listing redirects, categories and in- and outlinks of the article is added to the respective CAS. If the parameter is not set, the false is considered as default value.</description>
+        <type>Boolean</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>OnlyArticles</name>
+        <description>If set to true, only articles (and no disambiguation pages) are processed. Default is 'true'.</description>
+        <type>Boolean</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>PageList</name>
+        <description>List of page titles defining which pages are considered by the reader.</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>CategoryList</name>
+        <description>If PageList is empty and CategoryList is not, only articles tagged with one of the listed categories are considered. Attention: articles tagged with subcategories of the listed categories are not considered.</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>ImageIdentifiers</name>
+        <description>a List of image identifiers for different languages</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>CategoryIdentifiers</name>
+        <description>a List of category identifiers for different languages</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>SectionsToSkip</name>
+        <description>list of titles indicating sections that are not wanted to be considered</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>BatchSize</name>
+        <description>Defines how many articles are selected from the data base for processing at once. If parameter is not set, default value is 100.</description>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>DataBaseServerURL</name>
+        <value>
+          <string>localhost</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>DataBase</name>
+        <value>
+          <string>eb_wikipedia</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>DataBaseUser</name>
+        <value>
+          <string>sa</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>OnlyArticles</name>
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>ImageIdentifiers</name>
+        <value>
+          <array/>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>PageList</name>
+        <value>
+          <array/>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>CategoryList</name>
+        <value>
+          <array/>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>BatchSize</name>
+        <value>
+          <integer>1000</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>DataBaseDriver</name>
+        <value>
+          <string>org.hsqldb.jdbcDriver</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import location="../../main/resources/TSDescriptors/julie-document-structure-types.xml"/>
+        <import location="../../main/resources/TSDescriptors/julie-document-meta-types.xml"/>
+        <import location="../../main/resources/TSDescriptors/julie-wikipedia-types.xml"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+      <outputsNewCASes>true</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+  <resourceManagerConfiguration/>
+</collectionReaderDescription>

@@ -1,0 +1,48 @@
+#------------------------------
+# candidate finder parameter:
+
+candidateFinder = TitlePatternCandidateFinder
+# possible pattern:
+#  1: <_><termValue><_>
+#  2: <_><TermValue> (*)
+#  3: <_><termValue> *
+#  4: <_><termValue>-*
+#  5: * <termValue><_>
+#  6: *-<termValue><_>
+#  7: *<termValue><_>
+#  8: * <termValue> *
+#  9: *-<TermValue>-*
+# 10: *<termValue>*
+titlePatternCandidateFinder_pattern = 1,2,3,4,5,6,7,8,9,10
+# pattern ratings correspond to the usedPattern at the same position
+titlePatternCandidateFinder_patternRatings = 1.0,1.0,0.6,0.6,0.5,0.5,0.1,0.5,0.4,0.1
+# how many documents should be found at max from the given pattern, starting with the patttern with the highest rating
+titlePatternCandidateFinder__maxTermDocuments = 20
+# how many documents should be found at max from a given pattern
+titlePatternCandidateFinder_maxTermDocumentsPerPattern = 10
+# rating for documents that are alternative links on wikipedia disambiguation sites
+titlePatternCandidateFinder_alternativeURIRating = 0.9
+
+candidateFinder_documentCategorizer = ContentFieldDocumentCategorizer
+
+# /candidate finder parameter
+#------------------------------
+# document scorer parameter:
+
+# comma separated scorer name list of used document scorer
+documentScorer = TermVectorDocumentScorer,KeywordDocumentScorer,CandidateRatingDocumentScorer,MultimatchingSurfaceFormDocumentScorer,CosSimilarityDocumentScorer
+# which value should be added to the rating factor if the title of the documents found by the pattern match with more than one surfaceForm
+multimatchingSurfaceFormDocumentScorer_multimatchingSurfaceFormScore = 0.5
+
+# /document scorer parameter
+#------------------------------
+# scoring combiner parameter:
+
+# scoring combiner implementation that calculates a score for the document by aggregating the document scorers results
+documentScoringCombiner = LinearScoringCombiner
+# comma separated list of the weighting of the scores calculated by linear document scorer
+# the number of scorer weightings must match the number of scorers defined in the property document scorer
+# a value of zero means that the scorer will not be used
+linearScoringCombiner_documentScorerWeightings = 0,0.3,0.2,0.1,0.4
+
+# /scoring combiner parameter

@@ -1,0 +1,35 @@
+header.title = BBC-DaaS Disambiguation
+header.displayLanguage = Anzeigesprache
+footer.optimizedFor = optimiert f\u00fcr
+
+menu.wikipedia = Wikipedia
+
+startpage.welcome = Willkommen
+
+wikipedia.caption = Wikipedia XML-Dump - Analyse mit Lucene
+wikipedia.help = Kurzanleitung
+wikipedia.term = Term
+wikipedia.searchForURIs = Suche nach URIs
+wikipedia.disambiguation = Disambiguierung
+wikipedia.terms = Terme
+wikipedia.disambiguate = Disambiguiere
+wikipedia.searchInProgress = Suche l\u00e4uft
+wikipedia.noResult = Anfrage lieferte keine Ergebnisse
+wikipedia.keywords = Keywords
+wikipedia.documentType = Dokument Typ
+wikipedia.documentType.article = Artikel
+wikipedia.documentType.disambiguation = Begriffskl\u00e4rung
+wikipedia.documentType.redirect = Weiterleitung
+wikipedia.wildcardHint = (Wildcards k\u00f6nnen genutzt werden)
+
+wikipedia.config.caption = Konfiguration
+wikipedia.config.noConfigData = Fehler: Keine Verbindung zum Webservice m\u00f6glich.
+wikipedia.config.candidateSearch = Kandidatensuche
+wikipedia.config.patternRatings = Pattern-Wertungen
+wikipedia.config.scoring = Bewertung
+wikipedia.config.scoring.scorer = Scorer
+
+wikipedia.output.documentsSortedByTermValue = Sortiert nach Term/Score:
+wikipedia.output.documentsSortedByScore = Sortiert nur nach Score:
+
+wikipedia.help.caption = Kurzanleitung f\u00fcr "Wikipedia XML-Dump - Analyse mit Lucene"

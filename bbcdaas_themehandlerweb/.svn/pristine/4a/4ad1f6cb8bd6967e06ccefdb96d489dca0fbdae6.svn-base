@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+.header {
+	background-color: khaki;
+	height: 50px;
+}
+
+#header_title {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#header_languageSelection {
+	float: right;
+	margin-right: 10px;
+}
+
+.content {
+	height: 750px;
+}
+
+.content_menu {
+	background-color: white;
+	width: 100px;
+	float: left;
+	height: 100%;
+	overflow: hidden;
+	border-right-color: khaki;
+	border-right-width: 1px;
+	border-right-style: solid;
+}
+
+.content_main {
+	background-color: white;
+	margin: auto;
+	height: 740px;
+	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.footer {
+	border-top-color: khaki;
+	border-top-width: 1px;
+	border-top-style: solid;
+	background-color: white;
+	height: 60px;
+}
+
+#footer_left {
+	float: left;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+#footer_right {
+	float: right;
+	margin-right: 10px;
+	margin-top: 5px;
+}

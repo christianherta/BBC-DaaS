@@ -1,0 +1,236 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.bbcdaas</groupId>
+	<artifactId>bbcdaas_visualizer</artifactId>
+	<packaging>war</packaging>
+	<name>BBC-DaaS Visualizer</name>
+    <version>1.0-SNAPSHOT</version>
+	<description></description>
+	<url>http://www.bbc-daas.de</url>
+
+	<issueManagement>
+		<system>Jira</system>
+		<url>http://bbcdaas.f4.htw-berlin.de:8090/secure/Dashboard.jspa</url>
+	</issueManagement>
+
+	<distributionManagement>
+       <site>
+	      <id>mavensites</id>
+          <url>scp:http://bbcdaas.f4.htw-berlin.de/sites/</url>
+       </site>
+	</distributionManagement>
+
+	<developers>
+	   <developer>
+	       <id>robil</id>
+		   <name>Robert Illers</name>
+		   <email>robert.illers@htw-berlin.de</email>
+	   </developer>
+	   <developer>
+	       <id>herta</id>
+		   <name>Christian Herta</name>
+		   <email>christian.herta@htw-berlin.de</email>
+	   </developer>
+	</developers>
+
+	<scm>
+		<connection>scm:svn:http://bbcdaas.f4.htw-berlin.de/svn/bbcdaas_common</connection>
+		<developerConnection>scm:svn:http://bbcdaas.f4.htw-berlin.de/svn/bbcdaas_common</developerConnection>
+		<url>http://bbcdaas.f4.htw-berlin.de/svn/bbcdaas_common</url>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<surefire-plugin.version>2.12.4</surefire-plugin.version>
+	</properties>
+
+	<repositories>
+
+        <repository>
+            <id>central-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>snapshots-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
+	<pluginRepositories>
+
+		<pluginRepository>
+            <id>central-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+		<pluginRepository>
+            <id>snapshots-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+
+    </pluginRepositories>
+
+	<dependencies>
+
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.bbcdaas</groupId>
+			<artifactId>bbcdaas_common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.bbcdaas</groupId>
+			<artifactId>bbcdaas_taghandler</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>3.1.4.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+           <groupId>javax.servlet.jsp</groupId>
+           <artifactId>jsp-api</artifactId>
+           <version>2.2</version>
+           <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<!-- log4j (api of slf4j 1.5.8 required) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+		<!-- /log4j -->
+
+	</dependencies>
+
+	<build>
+
+		<finalName>bbcdaas</finalName>
+
+		<plugins>
+
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/META-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>META-INF</targetPath>
+                            <includes>
+                                <include>**/context.*</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+			<!-- surefire plugin for managing test runs (maven goals) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit4</artifactId>
+						<version>${surefire-plugin.version}</version>
+					</dependency>
+				</dependencies>
+            </plugin>
+
+		</plugins>
+
+	</build>
+
+</project>

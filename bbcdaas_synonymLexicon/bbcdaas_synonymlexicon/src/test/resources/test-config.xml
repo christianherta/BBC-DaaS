@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<configuration>
+
+	<property>
+		<name>minTermFrequency</name>
+		<value>1</value>
+	</property>
+	
+	<property>
+		<name>tagDelimiter</name>
+		<value>,</value>
+	</property>
+
+	<property>
+			<name>minTermsPerEntity</name>
+			<value>2</value>
+	</property>
+	
+	<property>
+		<name>maxTermLength</name>
+		<value>50</value>
+	</property>
+	
+	<property>
+		<name>minTermLength</name>
+		<value>2</value>
+	</property>
+
+</configuration>

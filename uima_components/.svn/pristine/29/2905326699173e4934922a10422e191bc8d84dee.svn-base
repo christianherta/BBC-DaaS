@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>FileLineMetadata</name>
+  <description>Simple file line metadata</description>
+  <version>1.0</version>
+  <vendor>robertillers</vendor>
+  <types>
+
+    <typeDescription>
+      <name>de.bbcdaas.uima_components.cas_types.FileLineMetadata</name>
+      <description>Metadata for a file line</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>lineNumber</name>
+          <description>line number</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

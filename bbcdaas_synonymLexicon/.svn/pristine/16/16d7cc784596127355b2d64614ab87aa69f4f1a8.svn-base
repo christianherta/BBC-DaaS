@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BBC-DaaS SynonymLexicon Maven Site">
+  <bannerLeft>
+    <name>BBC-DaaS SynonymLexicon</name>
+    <src>http://141.45.146.185/mediawiki/skins/common/images/LogoMediaWiki.png</src>
+    <href>http://141.45.146.185/mediawiki/</href>
+  </bannerLeft>
+  <body>
+    <links>
+      <item name="Offizielle BBC-DaaS Website" href="http://www.bbc-daas.de/"/>
+    </links>
+
+    <menu name="BBC-DaaS SynonymLexicon">
+      <item name="FAQs" href="/faqs.html"/>
+    </menu>
+
+    ${reports}
+
+  </body>
+</project>

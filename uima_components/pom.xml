@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	
+	<artifactId>uima_components</artifactId>
+	<packaging>pom</packaging>
+	<name>UIMA Components</name>
+        <version>1.0</version>
+
+
+	<properties>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 	  <uima.version>2.4.0</uima.version>
+	</properties>
+
+	<!--modules>
+	 <module>....</module>
+	</modules-->
+
+	<dependencies>
+
+		<!-- UIMA -->
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+			<version>${uima.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-cpe</artifactId>
+			<version>${uima.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-tools</artifactId>
+			<version>${uima.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-component-test-util</artifactId>
+			<version>${uima.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- /UIMA -->
+
+	</dependencies>
+
+</project>

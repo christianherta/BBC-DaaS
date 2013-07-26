@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>de.bbcdaas.uima.impl.xing.casconsumer.TagCloudWriter</implementationName>
+  <processingResourceMetaData>
+    <name>Xmi Writer CAS Consumer</name>
+    <description>Writes my CAS to XML Files</description>
+    <version>0.1</version>
+    <vendor>christianherta.de</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>OutputDirectory</name>
+        <description>Directory where the XMI files will be written</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>FILENAME</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>OutputDirectory</name>
+        <value>
+          <string>D:\Projects\BBC-DaaS\Files\heritrix_crawls\xing_crawl2\output\</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>FILENAME</name>
+        <value>
+          <string>Xing_output2</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import location="../cas_types/DocumentMetadata.xml"/>
+        <import location="../cas_types/TagCloudTypeSystem.xml"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">de.bbcdaas.uima.impl.xing.cas.TagCloudDescriptor</type>
+          <type allAnnotatorFeatures="true">de.bbcdaas.uima.impl.xing.cas.DocumentMetadata</type>
+        </inputs>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>false</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+  <resourceManagerConfiguration/>
+</casConsumerDescription>

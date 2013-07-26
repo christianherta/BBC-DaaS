@@ -1,0 +1,4 @@
+java, c++, programmierung
+auto, flugzeug, bus, bahn
+java, c++, programmierer
+pkw, flugzeug, bus, bahn

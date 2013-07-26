@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>uima_components</artifactId>
+	<groupId>de.bbcdaas.uima_components</groupId>
+	<packaging>pom</packaging>
+	<name>BBC-DaaS UIMA Components</name>
+	<version>1.0-SNAPSHOT</version>
+
+	<developers>
+		<developer>
+			<id>robil</id>
+			<name>Robert Illers</name>
+			<email>robert.illers@htw-berlin.de</email>
+		</developer>
+		<developer>
+			<id>herta</id>
+			<name>Christian Herta</name>
+			<email>Christian.Herta@HTW-Berlin.de</email>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Jira</system>
+		<url>http://bbcdaas.f4.htw-berlin.de:8090/secure/Dashboard.jspa</url>
+	</issueManagement>
+
+	<distributionManagement>
+		<site>
+		   <id>mavensites</id>
+		   <url>http://bbcdaas.f4.htw-berlin.de/sites/</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<modules>
+		<module>bbcdaas_all-components</module>
+		<module>bbcdaas_uima-cpe</module>
+		<module>bbcdaas_uima-tools</module>
+		<module>bbcdaas_uima-cas-types</module>
+		<module>bbcdaas_pear-package-example</module>
+		<module>bbcdaas_arc-collection-reader</module>
+		<module>bbcdaas_xing-tagcloud-html-extractor</module>
+		<module>bbcdaas_xing-tagcloud-writer</module>
+		<module>bbcdaas_paradigm-indexer</module>
+		<module>bbcdaas_synonym-lexicon-output-reader</module>
+		<module>julielabs-wikipedia-reader</module>
+		<module>lucas</module>
+	</modules>
+
+	<repositories>
+
+        <repository>
+            <id>central-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>snapshots-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
+	<pluginRepositories>
+
+		<pluginRepository>
+            <id>central-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
+		<pluginRepository>
+            <id>snapshots-htw</id>
+            <url>http://bbcdaas.f4.htw-berlin.de:8081/nexus/content/groups/public-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+
+    </pluginRepositories>
+
+	<build>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.13</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.surefire</groupId>
+							<artifactId>surefire-junit4</artifactId>
+							<version>2.13</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<dependencyManagement>
+
+		<dependencies>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>surefire-junit4</artifactId>
+				<version>2.13</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>de.bbcdaas</groupId>
+			<artifactId>bbcdaas_common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- UIMA -->
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-cpe</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-tools</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-component-test-util</artifactId>
+			<version>2.4.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- /UIMA -->
+
+	</dependencies>
+
+</project>

@@ -1,0 +1,35 @@
+header.title = BBC-DaaS Disambiguation
+header.displayLanguage = \u042f\u0437\u044b\u043a \u0434\u0438\u0441\u043f\u043b\u0435\u044f
+footer.optimizedFor = \u043e\u043f\u0442\u0438\u043c\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u043d\u044b \u0434\u043b\u044f
+
+menu.wikipedia = Wikipedia
+
+startpage.welcome = \u0434\u043e\u0431\u0440\u043e \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c
+
+wikipedia.caption = Wikipedia XML-Dump - \u0410\u043d\u0430\u043b\u0438\u0437 \u0441 Lucene
+wikipedia.help = Help
+wikipedia.term = \u0441\u0440\u043e\u043a
+wikipedia.searchForURIs = \u041f\u043e\u0438\u0441\u043a \u043f\u043e URI
+wikipedia.disambiguation = \u041c\u043d\u043e\u0433\u043e\u0437\u043d\u0430\u0447\u043d\u044b\u0435
+wikipedia.terms = Terms
+wikipedia.disambiguate = \u0443\u0441\u0442\u0440\u0430\u043d\u044f\u0442\u044c \u043d\u0435\u043e\u0434\u043d\u043e\u0437\u043d\u0430\u0447\u043d\u043e\u0441\u0442\u044c
+wikipedia.searchInProgress = \u043f\u043e\u0438\u0441\u043a
+wikipedia.noResult = \u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u043d\u0435\u0442
+wikipedia.keywords = Keywords
+wikipedia.documentType = Dokument Typ
+wikipedia.documentType.article = Artikel
+wikipedia.documentType.disambiguation = Begriffskl\u00e4rung
+wikipedia.documentType.redirect = Weiterleitung
+wikipedia.wildcardHint = (Wildcards k\u00f6nnen genutzt werden)
+
+wikipedia.config.caption = Configuration
+wikipedia.config.noConfigData = Error: No connection to webservice.
+wikipedia.config.candidateSearch = Candidate finding
+wikipedia.config.patternRatings = Pattern ratings
+wikipedia.config.scoring = Scoring
+wikipedia.config.scoring.scorer = Scorer
+
+wikipedia.output.documentsSortedByTermValue = Sortiert nach Term/Score:
+wikipedia.output.documentsSortedByScore = Sortiert nur nach Score:
+
+wikipedia.help.caption = Kurzanleitung f\u00fcr "Wikipedia XML-Dump - Analyse mit Lucene"

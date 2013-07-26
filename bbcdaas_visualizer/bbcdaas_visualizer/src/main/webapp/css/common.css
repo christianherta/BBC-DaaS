@@ -1,0 +1,180 @@
+@charset "utf-8";
+
+body {
+	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a.menuLink {
+	font-size: 16px;
+}
+
+a.menuLink:hover {
+	background-color: #E0E0E0;
+}
+
+.hidden {
+	display: none;
+}
+
+.header {
+	background-color: aqua;
+	height: 50px;
+}
+
+.content {
+	height: 750px;
+}
+
+.main {
+	background-color: white;
+	margin: auto;
+	height: 740px;
+	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.menu {
+	background-color: white;
+	width: 100px;
+	float: left;
+	height: 100%;
+	overflow: hidden;
+	border-right-color: aqua;
+	border-right-width: 1px;
+	border-right-style: solid;
+}
+
+.footer {
+	border-top-color: aqua;
+	border-top-width: 1px;
+	border-top-style: solid;
+	background-color: white;
+	height: 60px;
+}
+
+.headline_header {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.headline_header a:link, .headline_header a:visited, .headline_header a:hover {
+        color: black;
+}
+
+.searchInput {
+	margin-top: 30px;
+}
+
+.searchOutput {
+	margin-top: 5px;
+	left: 105px;
+	position: relative;
+}
+
+.searchSuggestionResult { 
+	background-color: #FFFFFF; 
+	text-align: left; 
+	border: 1px solid #000000;
+	z-index: 999;
+	width: 20%;
+	top: 0px;
+	position: absolute;
+}
+
+.searchResult {
+	top:0px;
+	position: absolute;
+}
+
+.suggest_link {
+	background-color: #FFFFFF;
+	padding: 2px 6px 2px 6px;
+	cursor: pointer;
+}
+
+.hidden {
+	display: none;
+}
+
+.tagCloud {
+	display: table;
+	background: #303030;
+	padding:10px 5px 10px 5px;
+}
+
+.tagCloud a {
+	text-decoration:none;
+}
+
+.tagcloud a:hover {
+	text-decoration:underline; 
+}
+
+.tag1 {
+	color:#606060; 
+}
+
+.tag2 {
+	color:#808080;
+}
+
+.tag3 {
+	color:#E0E0E0; 
+}
+
+.tag4 {
+	color:#E0E0E0; font-weight: bold;
+}
+
+/* */
+.userList {
+}
+
+/* form menu ******************************************************************/
+.formmenu {
+	overflow: hidden;
+	height: 21px;
+	width: 60%;
+	background: url(../images/menu_back.gif) left no-repeat white;
+	padding-top: 1px;
+	border-bottom: black solid 1px;
+}
+
+.formmenu .formlink {
+	float: left;
+	width: 37px;
+	-overflow: hidden;
+	height: 21px;
+	font-size: 16px;
+	line-height: 21px;
+	color: black;
+	background: url(../images/menu_border.gif) left top no-repeat;
+	text-align: center;
+	padding: 0 0 0 4px;
+	cursor: pointer;
+}
+
+.formmenu .formlink:hover, .formmenu .active {
+	font-weight: bold;
+}
+
+.formmenu .active {
+	min-width: 200px;
+}
+/* /form menu *****************************************************************/
+
+span.dnd_mouseText {
+ position: absolute;
+ visibility: hidden;
+ color: black;
+ z-index: 100;
+}
+
+span.dnd_node {
+	cursor: pointer;
+}

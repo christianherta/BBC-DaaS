@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+			
+	<!--******************** spring annotation  *****************************-->
+	
+	<context:annotation-config />
+
+	<security:global-method-security secured-annotations="enabled" />
+
+	<context:component-scan base-package="de.bbcdaas.disambiguationweb"/>
+
+	<mvc:annotation-driven />
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+
+	<!--******************* /spring annotation  *****************************-->
+			
+	<!--***************************** tiles  ********************************-->
+
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+		<list>
+			<value>/WEB-INF/tiles-defs/tilesDefinitions.xml</value>
+		</list>
+		</property>
+	</bean>
+
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</bean>
+
+	<!--***************************** /tiles  *******************************-->		
+			
+	<!--**********************  text properties  ****************************-->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:properties/messages" />
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<mvc:interceptors>
+		<bean id="localeChangeInterceptor" 
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="de"/>
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	</bean>
+
+	<!--*********************  /text properties  ****************************-->
+	
+	<bean id="javaPersistenceAPI" class="de.bbcdaas.common.dao.api.JavaPersistenceAPI">
+		<constructor-arg value="PU" />
+	</bean>
+	
+	<bean id="themeHandlerWebDao" class="de.bbcdaas.disambiguationweb.dao.impl.jpa.DisambiguationWebDaoImpl">
+		<property name="javaPersistenceAPI" ref="javaPersistenceAPI" />
+	</bean>
+	
+	<bean id="userDetailsService" 
+				 class="de.bbcdaas.disambiguationweb.service.membership.UserDetailsServiceImpl" />
+	
+</beans>

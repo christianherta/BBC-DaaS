@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+.ajax_randomTermGroups {
+	float:left;
+	margin-right: 10px;
+}
+
+/* */
+.evaluation_main {
+}
+
+/* */
+.eval_randomGroups {
+}
+
+/* */
+.eval_topRelatedTerms {
+}
+
+.eval_ratedTermsTable {
+	margin-bottom: 5px;
+}
+
+.eval_addedTermsTable {
+	margin-bottom: 5px;
+}
+
+/* */
+.eval_addNewRatedTerm {
+}
+
+/* */
+.eval_topRelatedTerm_value {
+	
+}

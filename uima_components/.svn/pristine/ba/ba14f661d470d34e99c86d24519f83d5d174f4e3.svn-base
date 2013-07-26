@@ -1,0 +1,18 @@
+#supported document urls , property name starting with 'supportedDocumentURL_', followed by a number starting with 1
+supportedDocumentURL_1 = https://www.xing.com/profile/
+supportedDocumentURL_2 = http://www.xing.com/profile/
+
+# name of the tagCloud that should be extracted
+tagCloudName = Ich biete
+
+# Separator that will be applied between the tags of a tagCloud
+tagSeparator = ;
+
+# min lenght of a tag 
+tagLenghtMin = 2
+
+# min amount of tags a tagCloud should have
+tagAmountMin = 2
+
+# should the found documents printed into the log ? (default: false, only recommented for debugging) 
+logDocumentText = false

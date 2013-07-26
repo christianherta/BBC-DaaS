@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+span.dnd_mouseText {
+ position: absolute;
+ visibility: hidden;
+ color: black;
+ z-index: 100;
+}
+
+span.dnd_node {
+	cursor: pointer;
+}

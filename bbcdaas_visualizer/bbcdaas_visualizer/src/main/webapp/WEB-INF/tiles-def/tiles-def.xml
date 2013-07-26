@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="base.definition" template="/layout.jsp">
+		<put-attribute name="title" value="BBC-DaaS Visualizer" />
+		<put-attribute name="head" value="/jsp/head.jsp" />
+		<put-attribute name="header" value="/jsp/header/header.jsp" />
+		<put-attribute name="menu" value="/jsp/content/menu/menu.jsp" />
+		<put-attribute name="main" value="/jsp/content/main/startpage.jsp" />
+		<put-attribute name="footer" value="/jsp/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="page.startpage" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/startpage.jsp" />
+	</definition>
+	
+	<definition name="page.statistics" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/statistics/statistics.jsp" />
+	</definition>
+	
+	<definition name="page.fileOutput" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/fileOutput/fileOutput.jsp" />
+	</definition>
+	
+	<definition name="page.processing" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/processing/processing.jsp" />
+	</definition>
+	
+	<definition name="page.search" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/search/search.jsp" />
+	</definition>
+	
+	<definition name="page.help" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/common/help.jsp" />
+	</definition>
+	
+	<definition name="page.evaluation_admin" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/evaluation/evaluation_admin.jsp" />
+	</definition>
+	
+	<definition name="page.evaluation_tester" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/evaluation/evaluation_tester.jsp" />
+	</definition>
+	
+	<definition name="page.syntagClouds" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/syntagClouds/syntagClouds.jsp" />
+	</definition>
+	
+	<definition name="page.login" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/common/login.jsp" />
+	</definition>
+	
+	<definition name="page.loginFailure" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/common/loginFailure.jsp" />
+	</definition>
+	
+	<definition name="page.logoutSuccess" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/common/logoutSuccess.jsp" />
+	</definition>
+	
+	<definition name="page.userManagement" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/usermanagement/userManagement.jsp" />
+	</definition>
+	
+	<definition name="page.themecloud" extends="base.definition">
+		<put-attribute name="main" value="/jsp/content/main/themeClouds/themeClouds.jsp" />
+	</definition>
+	
+	<!-- subforms -->
+	
+	<definition name="page.processState" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/common/processState.jsp" />
+	</definition>
+	
+	<definition name="page.searchResult" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/search/searchResult.jsp" />
+	</definition>
+	
+	<definition name="page.randomTermGroups" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/evaluation/subforms/sub_randomTermGroups.jsp" />
+	</definition>
+	
+	<definition name="page.randomTerms" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/evaluation/subforms/sub_randomTerms.jsp" />
+	</definition>
+	
+	<definition name="page.ratedTerms" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/evaluation/subforms/sub_ratedTerms.jsp" />
+	</definition>
+	
+	<definition name="page.userAddNDelete" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/usermanagement/subforms/sub_userAddNDelete.jsp" />
+	</definition>
+	
+	<definition name="page.randomEntity" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/syntagClouds/subforms/sub_randomEntity.jsp" />
+	</definition>
+	
+	<definition name="page.entitySyntagClouds" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/syntagClouds/subforms/sub_entitySyntagClouds.jsp" />
+	</definition>
+	
+	<definition name="page.termDictionary" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/fileOutput/subforms/sub_termDictionary.jsp" />
+	</definition>
+	
+	<definition name="page.trainingData" template="/ajaxLayout.jsp">
+		<put-attribute name="ajax" value="/jsp/content/main/fileOutput/subforms/sub_trainingData.jsp" />
+	</definition>
+	
+	<!-- /subforms -->
+	
+</tiles-definitions>

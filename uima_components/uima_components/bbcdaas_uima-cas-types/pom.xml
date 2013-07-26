@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.bbcdaas.uima_components</groupId>
+		<artifactId>uima_components</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>bbcdaas_uima-cas-types</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>BBC-DaaS UIMA Cas-Types</name>
+	<url>http://maven.apache.org</url>
+
+	<developers>
+		<developer>
+			<id>robil</id>
+			<name>Robert Illers</name>
+			<email>robert.illers@htw-berlin.de</email>
+		</developer>
+		<developer>
+			<id>herta</id>
+			<name>Christian Herta</name>
+			<email>Christian.Herta@HTW-Berlin.de</email>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Jira</system>
+		<url>http://bbcdaas.f4.htw-berlin.de:8090/secure/Dashboard.jspa</url>
+	</issueManagement>
+
+	<distributionManagement>
+		<site>
+		   <id>mavensites</id>
+		   <url>http://bbcdaas.f4.htw-berlin.de/sites/</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>

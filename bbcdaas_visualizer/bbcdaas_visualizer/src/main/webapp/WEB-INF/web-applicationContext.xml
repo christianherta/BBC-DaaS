@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						   http://www.springframework.org/schema/mvc
+						   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+   <!--**************************** property files *************************-->
+    
+	<bean id="propertyPlaceholderConfigurer"
+		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/project.properties</value>
+				<value>classpath:properties/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+    
+    <bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:properties/messages" />
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="de"/>
+	</bean>
+	
+    <!--*************************** /property files *************************-->
+	
+	<!--***************************** tiles  ********************************-->
+	
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+		  <list>
+			<value>/WEB-INF/tiles-def/tiles-def.xml</value>
+		  </list>
+		</property>
+	</bean>
+	
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</bean>
+	
+	<!--***************************** /tiles  *******************************-->
+
+    <!--************************ url-mapping ********************************-->
+    
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/start.do">showStartPage</prop>
+				<prop key="/help.do">showHelpPage</prop>
+                <prop key="/showLoginForm.do">showLoginForm</prop>
+                <prop key="/handleLoginForm.do">handleLoginForm</prop>
+                <prop key="/logoutUser.do">logoutUser</prop>
+                <prop key="/userManagement.do">showUserManagement</prop>
+                <prop key="/statistics.do">showStatisticsPage</prop>
+                <prop key="/startStatisticsWriter.do">startStatisticsWriter</prop>
+                <prop key="/processing.do">showProcessingPage</prop>
+                <prop key="/startProcessing.do">startProcessing</prop>
+                <prop key="/search.do">showSearchPage</prop>
+                <prop key="/performSearch.do">performSearch</prop>
+                <prop key="/evaluation.do">showEvaluationPage</prop>
+                <prop key="/syntagClouds.do">showSyntagCloudsPage</prop>
+                <prop key="/handleEvaluationForm.do">handleEvaluationForm</prop>
+                <prop key="/handleUserManagementForm.do">handleUserManagementForm</prop>
+                <prop key="/handleSyntagCloudsForm.do">handleSyntagCloudsForm</prop>
+                <prop key="/fileOutput.do">showFileOutputPage</prop>
+                <prop key="/handleFileOutputForm.do">handleFileOutputForm</prop>
+				<prop key="/themeCloud.do">showThemeCloudPage</prop>
+                <prop key="/handleThemeCloudForm.do">handleThemeCloudForm</prop>
+            </props>
+        </property>
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+    </bean>
+    
+    <!--*********************** /url-mapping ********************************-->
+    
+	<!--********************* Controller beans ******************************-->
+	
+    <bean id="showStartPage" class="de.bbcdaas.visualizer.control.common.ShowStartPage">
+		<property name="enableProcessing" value="${visualizer.enableProcessing}" />
+		<property name="enableStatistics" value="${visualizer.enableStatistics}" />
+		<property name="enableSearch" value="${visualizer.enableSearch}" />
+		<property name="enableEvaluation" value="${visualizer.enableEvaluation}" />
+		<property name="enableSyntagClouds" value="${visualizer.enableSyntagClouds}" />
+		<property name="enableThemeClouds" value="${visualizer.enableThemeClouds}" />
+		<property name="enableFileOutput" value="${visualizer.enableFileOutput}" />
+	</bean>
+    <bean id="showLoginForm" class="de.bbcdaas.visualizer.control.common.ShowLoginForm"></bean>
+	<bean id="showHelpPage" class="de.bbcdaas.visualizer.control.common.ShowHelpPage"></bean>
+	<bean id="handleLoginForm" class="de.bbcdaas.visualizer.control.common.HandleLoginForm"></bean>
+	<bean id="logoutUser" class="de.bbcdaas.visualizer.control.common.LogoutUser"></bean>
+	<bean id="showUserManagement" class="de.bbcdaas.visualizer.control.common.ShowUserManagement"></bean>
+	<bean id="showStatisticsPage" class="de.bbcdaas.visualizer.control.statistics.ShowStatisticsPage"></bean>
+	<bean id="startStatisticsWriter" class="de.bbcdaas.visualizer.control.statistics.StartStatisticsWriter"></bean>
+	<bean id="showProcessingPage" class="de.bbcdaas.visualizer.control.processing.ShowProcessingPage"></bean>
+	<bean id="startProcessing" class="de.bbcdaas.visualizer.control.processing.StartProcessing"></bean>
+	<bean id="showSearchPage" class="de.bbcdaas.visualizer.control.search.ShowSearchPage"></bean>
+	<bean id="performSearch" class="de.bbcdaas.visualizer.control.search.PerformSearch"></bean>
+	<bean id="showEvaluationPage" class="de.bbcdaas.visualizer.control.evaluation.ShowEvaluationPage"></bean>
+	<bean id="showSyntagCloudsPage" class="de.bbcdaas.visualizer.control.syntagclouds.ShowSyntagCloudsPage"></bean>
+	<bean id="handleEvaluationForm" class="de.bbcdaas.visualizer.control.evaluation.HandleEvaluationForm"></bean>
+	<bean id="handleUserManagementForm" class="de.bbcdaas.visualizer.control.common.HandleUserManagementForm"></bean>
+	<bean id="handleSyntagCloudsForm" class="de.bbcdaas.visualizer.control.syntagclouds.HandleSyntagCloudsForm"></bean>
+	<bean id="showFileOutputPage" class="de.bbcdaas.visualizer.control.fileoutput.ShowFileOutputPage"></bean>
+	<bean id="handleFileOutputForm" class="de.bbcdaas.visualizer.control.fileoutput.HandleFileOutputForm"></bean>
+	<bean id="showThemeCloudPage" class="de.bbcdaas.visualizer.control.themecloud.ShowThemeCloudPage"></bean>
+	<bean id="handleThemeCloudForm" class="de.bbcdaas.visualizer.control.themecloud.HandleThemeCloudForm"></bean>
+	
+	<!--******************** /Controller beans ******************************-->
+	
+</beans>

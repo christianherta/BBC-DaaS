@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<configuration>
+
+	<!-- Minimum frequency for a term to become a lexicon term  -->
+	<property>
+		<name>minTermFrequency</name>
+		<value>100</value>
+	</property>
+
+	<property>
+		<name>maxTermLength</name>
+		<value>30</value>
+	</property>
+	
+	<property>
+		<name>minTermLength</name>
+		<value>1</value>
+	</property>
+
+	<property>
+		<name>maxNumberOfTotalTerms</name>
+		<value>10000</value>
+	</property>
+
+	<property>
+		<name>minTermsPerEntity</name>
+		<value>2</value>
+	</property>
+
+	<property>
+		<name>minCosineSimilarity</name>
+		<value>0.5</value>
+	</property>
+
+	<property>
+		<name>tagDelimiter</name>
+		<value>;</value>
+	</property>
+
+	<property>
+		<name>outputLocalDirName</name>
+		<value>output</value>
+	</property>
+
+	<property>
+		<name>outputDirBaseName</name>
+		<value>output</value>
+	</property>
+
+	<property>
+		<name>distributedCache.basename</name>
+		<value>distCache</value>
+	</property>
+
+</configuration>

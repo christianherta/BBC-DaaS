@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+body {
+	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: #E0E0E0;
+}
+
+.hidden {
+	display: none;
+}
+
+.errorblock {
+	color: #ff0000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
+}
+
+/* form menu ******************************************************************/
+.formmenu {
+	overflow: hidden;
+	height: 21px;
+	width: 60%;
+	background: url(../images/menu_back.gif) left no-repeat white;
+	padding-top: 1px;
+	border-bottom: black solid 1px;
+}
+
+.formmenu .formlink {
+	float: left;
+	width: 37px;
+	-overflow: hidden;
+	height: 21px;
+	font-size: 16px;
+	line-height: 21px;
+	color: black;
+	background: url(../images/menu_border.gif) left top no-repeat;
+	text-align: center;
+	padding: 0 0 0 4px;
+	cursor: pointer;
+}
+
+.formmenu .formlink:hover, .formmenu .active {
+	font-weight: bold;
+}
+
+.formmenu .active {
+	min-width: 200px;
+}
+/* /form menu *****************************************************************/

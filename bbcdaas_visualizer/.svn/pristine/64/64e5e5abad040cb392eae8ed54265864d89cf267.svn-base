@@ -1,0 +1,68 @@
+# switches to enable menu items
+visualizer.enableProcessing = false
+visualizer.enableStatistics = false
+visualizer.enableSearch = true
+visualizer.enableEvaluation = false
+visualizer.enableSyntagClouds = false
+visualizer.enableThemeClouds = false
+visualizer.enableFileOutput = false
+
+# max numbers of entities to read, set to -1 if value should be ignored
+tagHandler.maxEntities = 5000
+# should the data be read?
+tagHandler.readEntities = true
+# should the syntagmatic relations be computed?
+tagHandler.computeSyntagmaticRelations = true
+# should the top related terms be computed?
+tagHandler.computeTopRelatedTerms = true
+# compute Top Syntagmatic Terms
+tagHandler.computeTopSyntagmaticTerms = true
+
+#entity reader
+simpleEntityFileReader.inputFileName = input/Xing_output1.txt
+simpleEntityFileReader.entityNameToFieldsSeparator = :
+simpleEntityFileReader.termToTermSeparator = ,
+simpleEntityFileReader.entityDelimiter = \\s*[\\n]\\s*
+#/entity reader
+
+#entity cleaner
+simpleEntityCleaner.minTermCount = 2
+simpleEntityCleaner.minTermLength = 1
+simpleEntityCleaner.maxWordsInTerm = 2
+simpleEntityCleaner.maxWordLength = 30
+#/entity cleaner
+
+#entity writer
+simpleEntityFileWriter.outputFileName = entityReaderOutput.txt
+simpleEntityFileWriter.entityNameToFieldsSeparator = ::
+simpleEntityFileWriter.fieldNameToTermsSeparator = :
+simpleEntityFileWriter.termToTermSeparator = ,
+simpleEntityFileWriter.fieldToFieldSeparator = ;
+#/entity writer
+
+#relation compute
+#only x terms can become top-terms
+syntagmaticComputation.maxTopRelatedTerms = 10
+#only x percentage of the related terms can become top-terms 
+syntagmaticComputation.maxPercentageTopTerms = 20
+#only terms get an entry of correlated terms with more than x correlated terms
+syntagmaticComputation.minNbCorrelatedTerms = 4
+#only term with a min Frequency of x get an correlated Terms Entry
+syntagmaticComputation.minTermFrequency = 3
+syntagmaticComputation.minSyntagmaticValue = 20.0
+#relation of syntagmatic terms to original terms of an entity
+syntagmaticComputation.syntagmaticEntityTermFactor = 3.0
+#/relation compute
+
+statisticWriter.statisticOutputDirectory = statisticOutput
+statisticWriter.writeEntityOutput = true
+statisticWriter.entityOutputFileName = entities.txt
+statisticWriter.writeTermLexiconOutput = true
+statisticWriter.termLexiconOutputFileName = terms.txt
+statisticWriter.writeCooccurrenceOutput = true
+statisticWriter.cooccurrenceOutputFileName = cooccurrence.txt
+statisticWriter.writeTopRelatedTermsOutput = true
+statisticWriter.topRelatedTermsOutputFileName = topRelatedTerms.txt
+
+trainingDataWriter.dictionaryOutputFileName = dictionary
+trainingDataWriter.trainingDataOutputFileName = trainingData

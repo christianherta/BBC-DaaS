@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+	<definition name="defaultTemplate" template="/template/template.jsp">
+		<put-attribute name="head" value="/template/head.jsp" />
+        <put-attribute name="header" value="/template/header.jsp" />
+        <put-attribute name="menu" value="/template/menu.jsp" />
+		<put-attribute name="main" value="/template/startpage.jsp" />
+        <put-attribute name="footer" value="/template/footer.jsp" />
+    </definition>
+	
+	<definition name="startpage" extends="defaultTemplate">
+		<put-attribute name="main" value="/template/startpage.jsp" />
+	</definition>
+	
+	<definition name="login" extends="defaultTemplate">
+		<put-attribute name="main" value="/views/login.jsp" />
+	</definition>
+	
+	<definition name="themeclouds" extends="defaultTemplate">
+		<put-attribute name="main" value="/views/themeClouds/themeClouds.jsp" />
+	</definition>
+	
+	<definition name="usermanagement" extends="defaultTemplate">
+		<put-attribute name="main" value="/views/usermanagement/userManagement.jsp" />
+	</definition>
+	
+	<definition name="userAddNDelete" template="template/ajaxTemplate.jsp">
+		<put-attribute name="ajax" value="/views/usermanagement/subforms/sub_userAddNDelete.jsp" />
+	</definition>
+	
+</tiles-definitions>

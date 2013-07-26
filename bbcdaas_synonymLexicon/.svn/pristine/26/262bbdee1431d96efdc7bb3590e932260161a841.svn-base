@@ -1,0 +1,1 @@
+nohup sudo -u hdfs hadoop jar bbcdaas_synonymlexicon-1.0-SNAPSHOT-job.jar -inputPath input/simSmall -tagDelimiter ',' -startJob 1 -stopJob 16 -singleJob 0 -minTermFrequency 1 -minTermLength 1 -maxTermLength 30 &

@@ -1,0 +1,10 @@
+# disabled webservices
+# list of webservice names that should not execute on call
+# names of webservices are defined in the XYZWebserviceURIs.java constants,
+# located in the package de.bbcdaas.webservices.api.XYZ, where XYZ is the
+# subpackages name
+# if the keyword 'none' is in the list of disabled webservices, no webservice in
+# this list will be deactivated
+disabledDisambiguationWebservices = none,searchForWikipediaURIs,scoreWikipediaDocs,disambiguateContext,getScoringConfiguration
+disabledTagHandlerWebservices = none,searchForTRTsJSON,searchForTRTsHTML,searchForTerms,searchForTermsJSONP,searchForEntity
+disabledThemeHandlerWebservices = none,getAllThemeClouds,deleteThemeCloud,saveNewThemeCloud

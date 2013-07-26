@@ -1,0 +1,82 @@
+This is a simple article. It was created for Testing purpose and should contain all relevant elements of the wikipedia api. The first reference<ref name="pmid9570129">author = Latchman DS | title = An example: first reference | journal = Int. J. Biochem. Cell Biol. | volume = 29 | issue = 12 | pages = 1305–12 | year = 1997 | pmid = 9570129 | doi = 10.1016/S1357-2725(97)00085-X</ref> is followed by the second one.<ref name="pmid2128034">{{cite journal | author = Karin M | title = Too many references: exclude them | journal = New Biol. | volume = 2 | issue = 2 | pages = 126–31 | year = 1990 | pmid = 2128034 | doi = | issn = }}</ref>
+
+The article contains [[links without caption]] and [[links with caption|link]] 
+
+==Subheadline==
+
+A subsection Text.
+
+==Second Subheadline==
+
+Another Section with some text.
+
+==Third Subheadline==
+
+A Section with some stupid Text and some elements.
+And some line breaks.
+Yes. Some line breaks.
+
+ {| style=\"text-align:right;\" 
+|+ Test Tabeble with numbers
+|- 
+| <tt>365</tt> 
+|- 
+| <tt>+ 123</tt> 
+|- 
+| <tt>+ 235</tt> 
+|- 
+| <tt>+ 277</tt> 
+|- 
+| style=\"border-top: 1pt black solid;\" 
+| <tt>1000</tt> 
+|}
+
+===References===
+<!-- ---------------------------------------------------------------
+See http://en.wikipedia.org/wiki/Wikipedia:Footnotes for a
+discussion of different citation methods and how to generate
+footnotes using the <ref> & </ref> tags and the {{Reflist}} template
+-------------------------------------------------------------------- -->
+{{Reflist|2}}
+
+===A Subsection===
+
+{| class=\"float-right\"
+| [[Datei:testImage.jpg|100px]] 
+|- 
+| Image Cpation 
+|} 
+
+[[Image:Example.png|thumb|Example image caption]] Some Text
+; Definition lists 
+; first item : Definition of first item. 
+; second item ([[zweites]])
+: definition of second item
+; third item
+: definition of third item
+
+===Another SubSection===
+ 
+A List: 
+* a 
+* b. 
+** x 
+** y 
+*** k. 
+*** l 
+*** m 
+** z 
+* c. 
+* d. 
+
+===References===
+<!-- ---------------------------------------------------------------
+See http://en.wikipedia.org/wiki/Wikipedia:Footnotes for a
+discussion of different citation methods and how to generate
+footnotes using the <ref> & </ref> tags and the {{Reflist}} template
+-------------------------------------------------------------------- -->
+{{Reflist|2}}
+
+
+
+[[Category:Testarcticles]]XXX
