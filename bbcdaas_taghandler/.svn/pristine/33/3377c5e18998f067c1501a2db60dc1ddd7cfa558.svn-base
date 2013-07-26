@@ -1,0 +1,45 @@
+tagHandler_test.useSingleTermLexicon = true
+# max numbers of entities to read, set to -1 if value should be ignored
+tagHandler_test.maxEntities = -1
+# should the data be read?
+tagHandler_test.readEntities = true
+
+#entity reader
+entityFileReader_test.inputFileName = testClouds.txt
+entityFileReader_test.entityDelimiter = \\s*[\\n]\\s*
+xingEntityFileReader_test.entityNameToFieldsSeparator = :
+xingEntityFileReader_test.termToTermSeparator = ,
+#/entity reader
+
+#entity cleaner
+simpleEntityCleaner_test.minTermCount = 1
+simpleEntityCleaner_test.minTermLength = 1
+simpleEntityCleaner_test.maxWordsInTerm = 2
+simpleEntityCleaner_test.maxWordLength = 30
+#/entity cleaner
+
+#entity writer
+simpleEntityFileWriter_test.outputFileName = entityReaderTestOutput.txt
+simpleEntityFileWriter_test.entityNameToFieldsSeparator = ::
+simpleEntityFileWriter_test.fieldNameToTermsSeparator = :
+simpleEntityFileWriter_test.termToTermSeparator = ,
+simpleEntityFileWriter_test.fieldToFieldSeparator = ;
+#/entity writer
+
+#relation compute
+#only x terms can become top-terms
+syntagmaticComputation_test.maxTopRelatedTerms = 30
+#only x percentage of the related terms can become top-terms 
+syntagmaticComputation_test.maxPercentageTopTerms = 50
+#only terms get an entry of correlated terms with more than x correlated terms
+syntagmaticComputation_test.minNbCorrelatedTerms = 4
+#only term with a min Frequency of x get an correlated Terms Entry
+syntagmaticComputation_test.minTermFrequency = 3
+syntagmaticComputation_test.minSyntagmaticValue = 20.0
+#relation of syntagmatic terms to original terms of an entity
+syntagmaticComputation_test.syntagmaticEntityTermFactor = 3.0
+# a
+syntagmaticComputation_test.a = 1.0
+# b
+syntagmaticComputation_test.b = 1.0
+#/relation compute

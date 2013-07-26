@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--****************************************************************************
+**                spring configuration for tagHandler tests                   **
+**                                                                            **
+**                                                                            **
+*****************************************************************************-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/jdbc
+           http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		   http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+		   http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+  
+  <!--**************************** property files *************************-->
+  
+	<bean id="propertyPlaceholderConfigurer"
+		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+                <value>classpath:properties/parameter.properties</value>
+				<value>classpath:properties/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+    
+    <!--*************************** /property files *************************-->
+  
+    <!--********************* data source definitions ***********************-->
+  
+    <!-- hqsqldb taghandler -->
+  
+	<bean id="dataSource_taghandler" 
+		  class="org.apache.commons.dbcp.BasicDataSource" 
+		  destroy-method="close">
+		<property name="driverClassName" value="${jdbc.taghandlerDB.test.hsqldb.driverClassName}"/>
+		<property name="url" value="${jdbc.taghandlerDB.test.hsqldb.url}"/>
+		<property name="username" value="${jdbc.taghandlerDB.test.hsqldb.username}"/>
+		<property name="password" value="${jdbc.taghandlerDB.test.hsqldb.password}"/>
+		<property name="initialSize" value="${jdbc.taghandlerDB.test.hsqldb.initialSize}" />
+		<property name="maxActive" value="${jdbc.taghandlerDB.test.hsqldb.maxActive}" />
+	</bean>
+	
+	<jdbc:initialize-database data-source="dataSource_taghandler" 
+							  ignore-failures="ALL">
+		<jdbc:script location="classpath:HQSQLDB_taghandlerTest.sql"/>
+	</jdbc:initialize-database>
+	
+    <!-- /hqsqldb taghandler -->
+	
+	<!-- hqsqldb termLexicon -->
+  
+	<bean id="dataSource_termLexicon" 
+		  class="org.apache.commons.dbcp.BasicDataSource" 
+		  destroy-method="close">
+		<property name="driverClassName" value="${jdbc.termLexiconDB.test.hsqldb.driverClassName}"/>
+		<property name="url" value="${jdbc.termLexiconDB.test.hsqldb.url}"/>
+		<property name="username" value="${jdbc.termLexiconDB.test.hsqldb.username}"/>
+		<property name="password" value="${jdbc.termLexiconDB.test.hsqldb.password}"/>
+		<property name="initialSize" value="${jdbc.termLexiconDB.test.hsqldb.initialSize}" />
+		<property name="maxActive" value="${jdbc.termLexiconDB.test.hsqldb.maxActive}" />
+	</bean>
+	
+	<jdbc:initialize-database data-source="dataSource_termLexicon" 
+							  ignore-failures="ALL">
+		<jdbc:script location="classpath:HQSQLDB_termLexiconTest.sql"/>
+	</jdbc:initialize-database>
+	
+    <!-- /hqsqldb termLexicon -->
+    
+    <!--******************** /data source definitions ***********************-->
+    
+    <!--*********************** tag handler *********************************-->
+    
+    <bean id="tagHandler" 
+		  class="de.bbcdaas.taghandler.TagHandlerImpl">
+		<property name="taghandlerDao" ref="taghandlerDao" />
+		<property name="entityReader" ref="entityReader" />
+		<property name="entityCleaner" ref="entityCleaner" />
+		<property name="entityWriter" ref="entityWriter" />
+                <property name="syntagmaticRelationCompute" ref="syntagmaticRelationCompute" />
+        <property name="useSingleTermLexicon" value="${tagHandler_test.useSingleTermLexicon}" />
+        <property name="readEntities" value="${tagHandler_test.readEntities}" />
+	</bean>
+    
+    <!--********************** /tag handler *********************************-->
+    
+    <!--****************************** dao **********************************-->
+    
+	<bean id="jdbcAPI_taghandler"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_taghandler"/>
+		  <property name="transactionsSupported" value="false"/>
+                  <property name="logSqlQueries" value="${jdbc.logSqlQueries}"/>
+	</bean>
+	
+	<bean id="jdbcAPI_termLexicon"
+		  class="de.bbcdaas.common.dao.api.JdbcAPI">
+		  <property name="dataSource" ref="dataSource_termLexicon"/>
+		  <property name="transactionsSupported" value="false"/>
+                  <property name="logSqlQueries" value="${jdbc.logSqlQueries}"/>
+	</bean>
+	
+	<bean id="taghandlerDao"
+		  class="de.bbcdaas.taghandler.dao.impl.sql.TagHandlerDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_taghandler"/>
+	</bean>
+	
+	<bean id="termlexiconDao"
+		  class="de.bbcdaas.taghandler.dao.impl.sql.TermLexiconDaoImpl">
+		<property name="jdbcAPI" ref="jdbcAPI_termLexicon"/>
+	</bean>
+
+    <!--***************************** /dao **********************************-->
+	
+	<!--*************************** entity reader ***************************-->
+    
+	<bean id="entityReader" 
+		  class="de.bbcdaas.taghandler.reader.XingEntityFileReader">
+		<property name="inputFileName" value="${entityFileReader_test.inputFileName}"/>
+		<property name="entityDelimiter" value="${entityFileReader_test.entityDelimiter}"/>
+		<property name="entityNameToFieldsSeparator" value="${xingEntityFileReader_test.entityNameToFieldsSeparator}"/>
+		<property name="termToTermSeparator" value="${xingEntityFileReader_test.termToTermSeparator}"/>
+	</bean>
+    
+    <!--************************** /entity reader ***************************-->
+	
+    <!--*********************** entity cleaner ******************************-->
+    
+	<bean id="entityCleaner" 
+		  class="de.bbcdaas.taghandler.cleaner.SimpleEntityCleaner">
+		  <property name="minTermCount" value="${simpleEntityCleaner_test.minTermCount}"/>
+		  <property name="minTermLength" value="${simpleEntityCleaner_test.minTermLength}"/>
+		  <property name="maxWordsInTerm" value="${simpleEntityCleaner_test.maxWordsInTerm}"/>
+          <property name="maxWordLength" value="${simpleEntityCleaner_test.maxWordLength}"/>
+	</bean> 
+    
+	<!--********************** /entity cleaner ******************************-->
+  
+    <!--********************** entityWriter *********************************-->
+
+	<bean id="entityWriter" 
+		  class="de.bbcdaas.taghandler.writer.EntitySqlDBWriter">	  
+		  <property name="taghandlerDao" ref="taghandlerDao" />
+		  <property name="termLexiconDao" ref="termlexiconDao" />
+	</bean> 
+	
+    <!--********************* /entityWriter *********************************-->
+    
+    <!--********************* relation computing ****************************-->
+    
+    <bean id="syntagmaticRelationCompute" 
+          class="de.bbcdaas.taghandler.compute.relation.syntagmatic.SimpleSyntagmaticRelationCompute">
+        <property name="syntagmaticStatisticalTest" ref="syntagmaticStatisticalTest" />
+        <property name="minTermFrequency" value="${syntagmaticComputation_test.minTermFrequency}" />
+        <property name="maxTopRelatedTerms" value="${syntagmaticComputation_test.maxTopRelatedTerms}" />
+        <property name="maxPercentageTopTerms" value="${syntagmaticComputation_test.maxPercentageTopTerms}" />
+        <property name="minNbCorrelatedTerms" value="${syntagmaticComputation_test.minNbCorrelatedTerms}" />
+        <property name="minSyntagmaticValue" value="${syntagmaticComputation_test.minSyntagmaticValue}" />
+        <property name="syntagmaticEntityTermFactor" value="${syntagmaticComputation_test.syntagmaticEntityTermFactor}" />
+        <property name="a" value="${syntagmaticComputation_test.a}" />
+        <property name="b" value="${syntagmaticComputation_test.b}" />
+        <property name="taghandlerDao" ref="taghandlerDao" />
+        <property name="termLexiconDao" ref="termlexiconDao" />
+        <property name="rankListEntryScorer" ref="rankListEntryScorer" />
+        <property name="useSingleTermLexicon" value="${tagHandler_test.useSingleTermLexicon}" />
+    </bean> 
+    
+    <!--******************** /relation computing ****************************-->
+
+    <!--******************** rank list entry scorer *************************-->
+
+    <bean id="rankListEntryScorer"
+          class="de.bbcdaas.taghandler.compute.score.SimpleRankListEntryScorer">
+    </bean> 
+	
+    <!--******************* /rank list entry scorer *************************-->
+    
+     <!--************************ statistical tests **************************-->
+
+    <bean id="syntagmaticStatisticalTest"
+          class="de.bbcdaas.taghandler.compute.statistic.syntagmatic.LogLikelihoodRatioTest" >
+    </bean>
+    
+    <!--*********************** /statistical tests **************************-->
+</beans>

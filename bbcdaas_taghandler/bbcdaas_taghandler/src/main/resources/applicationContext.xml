@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--****************************************************************************
+**                spring configuration for tagHandler main                    **
+**                                                                            **
+**                                                                            **
+*****************************************************************************-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/jdbc
+           http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+
+<!--***********|************** configuration section ************|***********-->
+<!--***********v*************************************************v***********-->
+
+<!-- Here the user can set which module implementation should be used in taghandler
+     process. Uncomment the bean definition of the implementation that should
+     be used. The parameter can be set in parameter.properties -->
+
+    <!--*************************** entity reader ***************************-->
+
+	<!-- XingEntityFileReader -->
+
+    <bean id="entityReader"
+          class="de.bbcdaas.taghandler.reader.XingEntityFileReader">
+        <property name="entityReadStep" value="${entityReader.entityReadStep}"/>
+        <property name="inputFolderName" value="${entityFileReader.inputFolderName}"/>
+        <property name="entityDelimiter" value="${entityFileReader.entityDelimiter}"/>
+        <property name="inputFileName" value="${xingEntityFileReader.inputFileName}"/>
+        <property name="entityNameToFieldsSeparator" value="${xingEntityFileReader.entityNameToFieldsSeparator}"/>
+        <property name="termToTermSeparator" value="${xingEntityFileReader.termToTermSeparator}"/>
+    </bean>
+
+
+	<!-- PixolutionEntityFileReader -->
+	<!--
+	<bean id="entityReader"
+		  class="de.bbcdaas.taghandler.reader.PixolutionEntityFileReader">
+		<property name="entityReadStep" value="${entityReader.entityReadStep}"/>
+		<property name="inputFolderName" value="${entityFileReader.inputFolderName}"/>
+		<property name="entityDelimiter" value="${entityFileReader.entityDelimiter}"/>
+	</bean>
+	-->
+
+	<!--
+	<bean id="entityReader"
+		  class="de.bbcdaas.taghandler.reader.SimpleEntityDBReader">
+	</bean>
+	-->
+
+	<!--*************************** entity reader ***************************-->
+
+	<!--*********************** entity cleaner ******************************-->
+
+    <bean id="entityCleaner"
+          class="de.bbcdaas.taghandler.cleaner.SimpleEntityCleaner">
+        <property name="minTermCount" value="${entityCleaner.minTermCount}"/>
+        <property name="minTermLength" value="${entityCleaner.minTermLength}"/>
+        <property name="maxWordsInTerm" value="${entityCleaner.maxWordsInTerm}"/>
+        <property name="maxWordLength" value="${entityCleaner.maxWordLength}"/>
+        <property name="forbiddenStrings" value="${entityCleaner.forbiddenStrings}" />
+    </bean>
+
+	<!--********************** /entity cleaner ******************************-->
+
+	<!--********************** entityWriter *********************************-->
+
+    <!--
+	<bean id="entityWriter"
+		  class="de.bbcdaas.taghandler.writer.SimpleEntityFileWriter">
+		  <property name="outputFileName" value="${simpleEntityFileWriter.outputFileName}" />
+		  <property name="entityNameToFieldsSeparator" value="${simpleEntityFileWriter.entityNameToFieldsSeparator}" />
+		  <property name="fieldNameToTermsSeparator" value="${simpleEntityFileWriter.fieldNameToTermsSeparator}" />
+          <property name="termToTermSeparator" value="${simpleEntityFileWriter.termToTermSeparator}" />
+          <property name="fieldToFieldSeparator" value="${simpleEntityFileWriter.fieldToFieldSeparator}" />
+	</bean>
+	-->
+
+    <bean id="entityWriter"
+          class="de.bbcdaas.taghandler.writer.EntitySqlDBWriter">
+        <property name="taghandlerDao" ref="taghandlerDao" />
+        <property name="termLexiconDao" ref="termLexiconDao" />
+        <property name="useSingleTermLexicon" value="${tagHandler.useSingleTermLexicon}" />
+    </bean>
+
+	<!--******************** /entityWriter **********************************-->
+
+	<!--********************** term data reducer ****************************-->
+
+    <bean id="termDataReducer"
+          class="de.bbcdaas.taghandler.reducer.SqlDbDataReducer">
+        <property name="taghandlerDao" ref="taghandlerDao" />
+        <property name="termLexiconDao" ref="termLexiconDao" />
+        <property name="taghandlerDaoReduced" ref="taghandlerDao_reduced" />
+        <property name="termLexiconDaoReduced" ref="termLexiconDao_reduced" />
+        <property name="minTermFrequency" value="${termDataReducer.minTermFrequency}" />
+        <property name="minTermCount" value="${termDataReducer.minTermCount}" />
+    </bean>
+
+	<!--********************* /term data reducer ****************************-->
+
+    <!--************************ statistical tests **************************-->
+
+    <bean id="syntagmaticStatisticalTest"
+          class="de.bbcdaas.taghandler.compute.statistic.syntagmatic.LogLikelihoodRatioTest" >
+    </bean>
+
+    <!--*********************** /statistical tests **************************-->
+
+	<!--********************* relation computing ****************************-->
+
+    <bean id="syntagmaticRelationCompute"
+          class="de.bbcdaas.taghandler.compute.relation.syntagmatic.SimpleSyntagmaticRelationCompute">
+        <property name="syntagmaticStatisticalTest" ref="syntagmaticStatisticalTest" />
+        <property name="minTermFrequency" value="${syntagmaticComputation.minTermFrequency}" />
+        <property name="maxTopRelatedTerms" value="${syntagmaticComputation.maxTopRelatedTerms}" />
+        <property name="maxPercentageTopTerms" value="${syntagmaticComputation.maxPercentageTopTerms}" />
+        <property name="minNbCorrelatedTerms" value="${syntagmaticComputation.minNbCorrelatedTerms}" />
+        <property name="minSyntagmaticValue" value="${syntagmaticComputation.minSyntagmaticValue}" />
+        <property name="syntagmaticEntityTermFactor" value="${syntagmaticComputation.syntagmaticEntityTermFactor}" />
+        <property name="a" value="${syntagmaticComputation.a}" />
+        <property name="b" value="${syntagmaticComputation.b}" />
+        <property name="taghandlerDao" ref="taghandlerDao" />
+        <property name="termLexiconDao" ref="termLexiconDao" />
+        <property name="rankListEntryScorer" ref="rankListEntryScorer" />
+    </bean>
+
+    <!--******************** /relation computing ****************************-->
+
+    <!--******************** rank list entry scorer *************************-->
+
+    <bean id="rankListEntryScorer"
+          class="de.bbcdaas.taghandler.compute.score.SimpleRankListEntryScorer">
+    </bean>
+
+    <!--******************* /rank list entry scorer *************************-->
+
+    <!--************************* statistics ********************************-->
+
+    <bean id="statisticWriter"
+              class="de.bbcdaas.taghandler.writer.statistics.SimpleStatisticWriter">
+        <property name="taghandlerDao" ref="taghandlerDao" />
+        <property name="tagHandlerTermLexiconDao" ref="termLexiconDao" />
+        <property name="statisticOutputDirectory" value="${simpleStatisticWriter.statisticOutputDirectory}" />
+        <property name="writeEntityOutput" value="${simpleStatisticWriter.writeEntityOutput}" />
+        <property name="entityOutputFileName" value="${simpleStatisticWriter.entityOutputFileName}" />
+        <property name="writeTermLexiconOutput" value="${simpleStatisticWriter.writeTermLexiconOutput}" />
+        <property name="termLexiconOutputFileName" value="${simpleStatisticWriter.termLexiconOutputFileName}" />
+        <property name="writeCooccurrenceOutput" value="${simpleStatisticWriter.writeCooccurrenceOutput}" />
+        <property name="cooccurrenceOutputFileName" value="${simpleStatisticWriter.cooccurrenceOutputFileName}" />
+        <property name="writeTopRelatedTermsOutput" value="${simpleStatisticWriter.writeTopRelatedTermsOutput}" />
+        <property name="topRelatedTermsOutputFileName" value="${simpleStatisticWriter.topRelatedTermsOutputFileName}" />
+    </bean>
+
+    <!--************************ /statistics ********************************-->
+
+<!--***********^************* /configuration section ************^***********-->
+<!--***********|*************************************************|***********-->
+
+
+
+<!--******************** non-configuration section, do not edit!!! **********-->
+<!--*************************************************************************-->
+
+    <!--**************************** property files *************************-->
+
+    <!--
+        These files are used to configure the taghandler parameters
+        and database connections.
+    -->
+
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+				<value>file:${confPath}/parameter.properties</value>
+                <!--<value>classpath:properties/parameter.properties</value>-->
+                <value>file:${confPath}/jdbc.properties</value>
+				<!--<value>classpath:properties/jdbc.properties</value>-->
+            </list>
+        </property>
+    </bean>
+
+    <!--*************************** /property files *************************-->
+
+    <!--********************* data source definitions ***********************-->
+
+	<!-- taghandlerDB -->
+    <bean id="dataSource_taghandler"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.taghandlerDB.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.taghandlerDB.mySQL.url}"/>
+        <property name="username" value="${jdbc.taghandlerDB.mySQL.username}"/>
+        <property name="password" value="${jdbc.taghandlerDB.mySQL.password}"/>
+        <property name="initialSize" value="${jdbc.taghandlerDB.mySQL.initialSize}" />
+        <property name="maxActive" value="${jdbc.taghandlerDB.mySQL.maxActive}" />
+    </bean>
+	<!-- /taghandlerDB -->
+
+	<!-- taghandlerDB_Reduced -->
+    <bean id="dataSource_taghandlerReduced"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.taghandlerDB_reduced.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.taghandlerDB_reduced.mySQL.url}"/>
+        <property name="username" value="${jdbc.taghandlerDB_reduced.mySQL.username}"/>
+        <property name="password" value="${jdbc.taghandlerDB_reduced.mySQL.password}"/>
+        <property name="initialSize" value="${jdbc.taghandlerDB_reduced.mySQL.initialSize}" />
+        <property name="maxActive" value="${jdbc.taghandlerDB_reduced.mySQL.maxActive}" />
+    </bean>
+	<!-- /taghandlerDB_Reduced -->
+
+	<!-- termLexicon -->
+    <bean id="dataSource_termLexicon"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.termLexicon.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.termLexicon.mySQL.url}"/>
+        <property name="username" value="${jdbc.termLexicon.mySQL.username}"/>
+        <property name="password" value="${jdbc.termLexicon.mySQL.password}"/>
+        <property name="initialSize" value="${jdbc.termLexicon.mySQL.initialSize}" />
+        <property name="maxActive" value="${jdbc.termLexicon.mySQL.maxActive}" />
+    </bean>
+	<!-- /termLexicon -->
+
+	<!-- termLexicon_reduced -->
+    <bean id="dataSource_termLexiconReduced"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.termLexicon_reduced.mySQL.driverClassName}"/>
+        <property name="url" value="${jdbc.termLexicon_reduced.mySQL.url}"/>
+        <property name="username" value="${jdbc.termLexicon_reduced.mySQL.username}"/>
+        <property name="password" value="${jdbc.termLexicon_reduced.mySQL.password}"/>
+        <property name="initialSize" value="${jdbc.termLexicon_reduced.mySQL.initialSize}" />
+        <property name="maxActive" value="${jdbc.termLexicon_reduced.mySQL.maxActive}" />
+    </bean>
+	<!-- /termLexicon -->
+
+    <!--******************** /data source definitions ***********************-->
+
+    <!--****************************** dao **********************************-->
+
+    <bean id="jdbcAPI_taghandler"
+          class="de.bbcdaas.common.dao.api.JdbcAPI">
+        <property name="dataSource" ref="dataSource_taghandler"/>
+        <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+        <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+        <property name="singleConnection" value="${jdbc.singleConnection}"/>
+        <property name="logSqlQueries" value="${jdbc.logSqlQueries}"/>
+    </bean>
+
+    <bean id="jdbcAPI_taghandlerDBReduced"
+          class="de.bbcdaas.common.dao.api.JdbcAPI">
+        <property name="dataSource" ref="dataSource_taghandlerReduced"/>
+        <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+        <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+        <property name="singleConnection" value="${jdbc.singleConnection}"/>
+        <property name="logSqlQueries" value="${jdbc.logSqlQueries}"/>
+    </bean>
+
+    <bean id="jdbcAPI_termLexicon"
+          class="de.bbcdaas.common.dao.api.JdbcAPI">
+        <property name="dataSource" ref="dataSource_termLexicon"/>
+        <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+        <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+        <property name="singleConnection" value="${jdbc.singleConnection}"/>
+        <property name="logSqlQueries" value="${jdbc.logSqlQueries}"/>
+    </bean>
+
+    <bean id="jdbcAPI_termLexiconReduced"
+          class="de.bbcdaas.common.dao.api.JdbcAPI">
+        <property name="dataSource" ref="dataSource_termLexiconReduced"/>
+        <property name="transactionsSupported" value="${jdbc.transactionsSupported}"/>
+        <property name="useSavepoints" value="${jdbc.useSavepoints}"/>
+        <property name="singleConnection" value="${jdbc.singleConnection}"/>
+        <property name="logSqlQueries" value="${jdbc.logSqlQueries}"/>
+    </bean>
+
+    <bean id="taghandlerDao"
+          class="de.bbcdaas.taghandler.dao.impl.sql.TagHandlerDaoImpl">
+        <property name="jdbcAPI" ref="jdbcAPI_taghandler"/>
+    </bean>
+
+    <bean id="taghandlerDao_reduced"
+          class="de.bbcdaas.taghandler.dao.impl.sql.TagHandlerDaoImpl">
+        <property name="jdbcAPI" ref="jdbcAPI_taghandlerDBReduced"/>
+    </bean>
+
+    <bean id="termLexiconDao"
+          class="de.bbcdaas.taghandler.dao.impl.sql.TermLexiconDaoImpl">
+        <property name="jdbcAPI" ref="jdbcAPI_termLexicon"/>
+    </bean>
+
+    <bean id="termLexiconDao_reduced"
+          class="de.bbcdaas.taghandler.dao.impl.sql.TermLexiconDaoImpl">
+        <property name="jdbcAPI" ref="jdbcAPI_termLexiconReduced"/>
+    </bean>
+
+	<!--****************************** /dao *********************************-->
+
+	<!--*********************** tag handler *********************************-->
+
+    <bean id="tagHandler"
+          class="de.bbcdaas.taghandler.TagHandlerImpl">
+        <property name="taghandlerDao" ref="taghandlerDao" />
+        <property name="syntagmaticRelationCompute" ref="syntagmaticRelationCompute" />
+        <property name="entityReader" ref="entityReader" />
+        <property name="termDataReducer" ref="termDataReducer" />
+        <property name="entityCleaner" ref="entityCleaner" />
+        <property name="entityWriter" ref="entityWriter" />
+        <property name="useSingleTermLexicon" value="${tagHandler.useSingleTermLexicon}" />
+        <property name="maxEntities" value="${tagHandler.maxEntities}" />
+        <property name="readEntities" value="${tagHandler.readEntities}" />
+        <property name="reduceTermData" value="${tagHandler.reduceTermData}" />
+        <property name="computeSyntagmaticRelations" value="${tagHandler.computeSyntagmaticRelations}" />
+        <property name="computeTopRelatedTerms" value="${tagHandler.computeTopRelatedTerms}" />
+        <property name="computeTopSyntagmaticTerms" value="${tagHandler.computeTopSyntagmaticTerms}" />
+    </bean>
+
+	<!--********************** /tag handler *********************************-->
+
+<!--*************************************************************************-->
+<!--******************* /non-configuration section, do not edit!!! **********-->
+</beans>

@@ -1,0 +1,4 @@
+dummy:Baum, Haus, 3
+dummy:Haus, Baum, 3
+dummy:Baum Haus, Maus, 4
+dummy:Maus, Baum Haus, 4

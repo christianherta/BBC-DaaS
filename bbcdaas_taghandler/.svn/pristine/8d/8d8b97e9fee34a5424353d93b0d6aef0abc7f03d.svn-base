@@ -1,0 +1,171 @@
+# configuration file for the tag handler
+# content:
+# 1. general tag handler settings
+# 2. settings for the tag handler modules
+#   2.1 entity reader
+#   2.2 entity cleaner
+#   2.3 entity writer
+#   2.4 term data reducer
+#   2.5 compute
+# 3. statistics
+
+# ------------------- 1. general tagHandler settings --------------------------#
+################################################################################
+
+# set to true if a single global term lexicon should be used. if set to false,
+# each taghandler database uses its local term lexicon.
+tagHandler.useSingleTermLexicon = true
+# max numbers of entities to read, set to -1 if value should be ignored
+tagHandler.maxEntities = 10000
+# should the data be read? This also clears the database from old data
+tagHandler.readEntities = false
+# reduce term data, only do this after redEntities step,
+# configure database connections & do only this task. after reduce
+# reconfigure database connection so the taghandler uses the reduced database
+# for following operations. Do not execute the computeSyntagmaticRelations step
+# without reconfiguring the database connection first.
+tagHandler.reduceTermData = false
+# should the syntagmatic relations be computed? This needs the execution of the
+# readEntities step first
+tagHandler.computeSyntagmaticRelations = true
+# should the top related terms be computed? This needs the execution of the
+# computeSyntagmaticRelations step first
+tagHandler.computeTopRelatedTerms = false
+# should the top syntagmatic terms be computed? This needs the execution of the
+# computeTopRelatedTerms first
+tagHandler.computeTopSyntagmaticTerms = false
+
+################################################################################
+# -------------------- /1. general tagHandler settings ------------------------#
+
+# ----------------- 2. settings for the tag handler modules -------------------#
+################################################################################
+
+# -------------------- 2.1 module: entity reader -------------------------------
+
+# --- general entity reader settings ---
+# how many entities should be read at once from the source before start reading?
+entityReader.entityReadStep = 1000
+# --- /general entity reader settings ---
+
+# --- general entity file reader settings ---
+# name of the folder where the input data is located relative from the taghandler jar
+entityFileReader.inputFolderName = input
+# string that separates two entities in input file
+entityFileReader.entityDelimiter = \\s*[\\n]\\s*
+# --- /general entity file reader settings ---
+
+# --- xing entity reader settings (extension of file reader) ---
+# name of the input file
+xingEntityFileReader.inputFileName = Xing_output1.txt
+# separator between the entity name and the first field
+xingEntityFileReader.entityNameToFieldsSeparator = :
+# separator between the terms of a field
+xingEntityFileReader.termToTermSeparator = ,
+# --- /xing entity reader settings (extension of file reader) ---
+
+# -------------------- /2.1 module: entity reader ------------------------------
+
+# -------------------- 2.2 module: entity cleaner ------------------------------
+
+# --- general entity cleaner settings ---
+
+# hint: all terms not matching all of the setted criterias will be
+# ignored by the cleaner
+
+# mow many terms should a field have at least
+entityCleaner.minTermCount = 2
+# how many characters should a term have a least
+entityCleaner.minTermLength = 1
+# max value for how many words (a word is a group of characters without whitespaces)
+# can hsve
+entityCleaner.maxWordsInTerm = 2
+# how many characters cqan a word in a term have at least
+entityCleaner.maxWordLength = 30
+# which characters should not occur in a term. forbidden strings are separated
+# by ';;'
+entityCleaner.forbiddenStrings = \(;;\);;\-;;\\;;\/;;\*;;\%;;\"
+# --- /general entity cleaner settings ---
+
+# ------------------- /2.2 module: entity cleaner ------------------------------
+
+# ------------------ 2.3 module: entity writer ---------------------------------
+
+# --- simpleEntityFileWriter ---
+# name of the file the entities should be written to
+simpleEntityFileWriter.outputFileName = entityReaderOutput.txt
+# separator between entity name and the first field
+simpleEntityFileWriter.entityNameToFieldsSeparator = ::
+# separator between the field name and the first term of the field
+simpleEntityFileWriter.fieldNameToTermsSeparator = :
+# separator between the terms of a field
+simpleEntityFileWriter.termToTermSeparator = ,
+# separator between the fields of an entity
+simpleEntityFileWriter.fieldToFieldSeparator = ;
+# --- /simpleEntityFileWriter ---
+
+# ----------------- /2.3 module: entity writer ---------------------------------
+
+# ------------------ 2.4 module: term data reducer -----------------------------
+
+# --- general term data reducer settings ---
+# how often should a term occure at least
+termDataReducer.minTermFrequency = 10
+# how many terms should a field have at least
+termDataReducer.minTermCount = 2
+# --- /general term data reducer settings ---
+
+# ----------------- /2.4 module: term data reducer -----------------------------
+
+# -------------------- 2.5 module: compute -------------------------------------
+
+# --- relation compute settings ---
+#only x terms can become top-terms
+syntagmaticComputation.maxTopRelatedTerms = 30
+#only x percentage of the related terms can become top-terms
+syntagmaticComputation.maxPercentageTopTerms = 50
+#only terms get an entry of correlated terms with more than x correlated terms
+syntagmaticComputation.minNbCorrelatedTerms = 4
+#only term with a min Frequency of x get an correlated Terms Entry
+syntagmaticComputation.minTermFrequency = 10
+#
+syntagmaticComputation.minSyntagmaticValue = 20.0
+#relation of syntagmatic terms to original terms of an entity
+syntagmaticComputation.syntagmaticEntityTermFactor = 3.0
+# a
+syntagmaticComputation.a = 1.0
+# b
+syntagmaticComputation.b = 1.0
+# --- /relation compute settings ---
+
+# ------------------- /2.5 module: compute -------------------------------------
+
+# ----------------- /2. settings for the tag handler modules ------------------#
+################################################################################
+
+################################################################################
+# --------------------------- 3. statistics -----------------------------------#
+
+# --- simple statistic writer ---
+# name of the directory the statistic output should be written to, relative to jar
+simpleStatisticWriter.statisticOutputDirectory = statisticOutput
+# should the entity statistics be written?
+simpleStatisticWriter.writeEntityOutput = false
+# name of the file the entity statistics should be written to
+simpleStatisticWriter.entityOutputFileName = entities.txt
+# should the term lexicon statistics be written?
+simpleStatisticWriter.writeTermLexiconOutput = false
+# name of the file the term lexicon statistics should be written to
+simpleStatisticWriter.termLexiconOutputFileName = terms.txt
+# should the cooccurrence matrix statistics be written?
+simpleStatisticWriter.writeCooccurrenceOutput = true
+# name of the file the cooccurrence matrix statistics should be written to
+simpleStatisticWriter.cooccurrenceOutputFileName = cooccurrence.txt
+# should the top related terms statistics be written?
+simpleStatisticWriter.writeTopRelatedTermsOutput = true
+# name of the file the top related terms statistics should be written to
+simpleStatisticWriter.topRelatedTermsOutputFileName = topRelatedTerms.txt
+# --- simple statistic writer ---
+
+# -------------------------- /3. statistics -----------------------------------#
+################################################################################

@@ -1,0 +1,43 @@
+jdbc.transactionsSupported = true
+jdbc.useSavepoints = false
+jdbc.singleConnection = true
+jdbc.logSqlQueries = false
+
+#--- MySQLDB -------------------------------------------------------------------
+#taghandlerDB
+jdbc.taghandlerDB.mySQL.driverClassName = com.mysql.jdbc.Driver
+jdbc.taghandlerDB.mySQL.initialSize = 0
+jdbc.taghandlerDB.mySQL.maxActive = 250
+#jdbc.taghandlerDB.mySQL.url = jdbc:mysql://localhost:3306/term_barthel_reduced?useUnicode=true&characterEncoding=UTF-8
+jdbc.taghandlerDB.mySQL.url = jdbc:mysql://localhost:3306/taghandler_xingCrawl2?useUnicode=true&characterEncoding=UTF-8
+jdbc.taghandlerDB.mySQL.username = root
+#jdbc.taghandlerDB.mySQL.password = bbcDB
+jdbc.taghandlerDB.mySQL.password = root
+
+#taghandlerDBReduced
+jdbc.taghandlerDB_reduced.mySQL.driverClassName = com.mysql.jdbc.Driver
+jdbc.taghandlerDB_reduced.mySQL.initialSize = 0
+jdbc.taghandlerDB_reduced.mySQL.maxActive = 250
+jdbc.taghandlerDB_reduced.mySQL.url = jdbc:mysql://localhost:3306/term_barthel_reduced?useUnicode=true&characterEncoding=UTF-8
+jdbc.taghandlerDB_reduced.mySQL.username = root
+jdbc.taghandlerDB_reduced.mySQL.password = bbcDB
+#jdbc.taghandlerDB_reduced.mySQL.password = root
+
+#termLexicon
+jdbc.termLexicon.mySQL.driverClassName = com.mysql.jdbc.Driver
+jdbc.termLexicon.mySQL.initialSize = 0
+jdbc.termLexicon.mySQL.maxActive = 250
+jdbc.termLexicon.mySQL.url = jdbc:mysql://localhost:3306/taghandler_termLexicon?useUnicode=true&characterEncoding=UTF-8
+jdbc.termLexicon.mySQL.username = root
+#jdbc.termLexicon.mySQL.password = bbcDB
+jdbc.termLexicon.mySQL.password = ccc
+
+#termLexicon_reduced
+jdbc.termLexicon_reduced.mySQL.driverClassName = com.mysql.jdbc.Driver
+jdbc.termLexicon_reduced.mySQL.initialSize = 0
+jdbc.termLexicon_reduced.mySQL.maxActive = 250
+jdbc.termLexicon_reduced.mySQL.url = jdbc:mysql://localhost:3306/taghandler_termLexicon_reduced?useUnicode=true&characterEncoding=UTF-8
+jdbc.termLexicon_reduced.mySQL.username = root
+jdbc.termLexicon_reduced.mySQL.password = bbcDB
+#jdbc.termLexicon.mySQL.password = root
+#-- /MySQLDB -------------------------------------------------------------------
